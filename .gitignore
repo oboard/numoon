@@ -1,2 +1,5 @@
 target/
 .mooncakes/
+
+# macOS
+.DS_Store
