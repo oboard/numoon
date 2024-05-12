@@ -1,10 +1,18 @@
-pub enum NMNumber {
+pub enum NMNum {
   NMInt(Int)
   NMDouble(Double)
   NMString(String)
-} derive(Show, Debug, Eq)
+} derive(Debug, Eq)
 
-fn op_add(self : NMNumber, that : NMNumber) -> NMNumber {
+pub fn to_string(self : NMNum) -> String {
+  match self {
+    NMInt(i) => i.to_string()
+    NMDouble(d) => d.to_string()
+    NMString(s) => s
+  }
+}
+
+pub fn op_add(self : NMNum, that : NMNum) -> NMNum {
   match (self, that) {
     (NMInt(a), NMInt(b)) => NMInt(a + b)
     (NMDouble(a), NMDouble(b)) => NMDouble(a + b)
@@ -15,7 +23,7 @@ fn op_add(self : NMNumber, that : NMNumber) -> NMNumber {
   }
 }
 
-fn op_sub(self : NMNumber, that : NMNumber) -> NMNumber {
+pub fn op_sub(self : NMNum, that : NMNum) -> NMNum {
   match (self, that) {
     (NMInt(a), NMInt(b)) => NMInt(a - b)
     (NMDouble(a), NMDouble(b)) => NMDouble(a - b)
@@ -26,7 +34,7 @@ fn op_sub(self : NMNumber, that : NMNumber) -> NMNumber {
   }
 }
 
-fn op_div(self : NMNumber, that : NMNumber) -> NMNumber {
+pub fn op_div(self : NMNum, that : NMNum) -> NMNum {
   match (self, that) {
     (NMInt(a), NMInt(b)) => NMInt(a / b)
     (NMDouble(a), NMDouble(b)) => NMDouble(a / b)
@@ -37,7 +45,7 @@ fn op_div(self : NMNumber, that : NMNumber) -> NMNumber {
   }
 }
 
-fn op_mul(self : NMNumber, that : NMNumber) -> NMNumber {
+pub fn op_mul(self : NMNum, that : NMNum) -> NMNum {
   match (self, that) {
     (NMInt(a), NMInt(b)) => NMInt(a * b)
     (NMDouble(a), NMDouble(b)) => NMDouble(a * b)
@@ -48,7 +56,7 @@ fn op_mul(self : NMNumber, that : NMNumber) -> NMNumber {
   }
 }
 
-fn to_int(self : NMNumber) -> Int {
+pub fn to_int(self : NMNum) -> Int {
   match self {
     NMInt(i) => i
     NMDouble(d) => d.to_int()
@@ -56,7 +64,7 @@ fn to_int(self : NMNumber) -> Int {
   }
 }
 
-fn to_double(self : NMNumber) -> Double {
+pub fn to_double(self : NMNum) -> Double {
   match self {
     NMInt(i) => i.to_double()
     NMDouble(d) => d
@@ -64,18 +72,24 @@ fn to_double(self : NMNumber) -> Double {
   }
 }
 
-pub fn to_NMInt(i : Int) -> NMNumber {
+pub fn NMNum::from_int(num : Int) -> NMNum {
+  NMInt(num)
+}
+
+pub fn NMNum::from_double(num : Double) -> NMNum {
+  NMDouble(num)
+}
+
+pub fn to_NMInt(i : Int) -> NMNum {
   NMInt(i)
 }
 
-pub fn to_NMDouble(d : Double) -> NMNumber {
+pub fn to_NMDouble(d : Double) -> NMNum {
   NMDouble(d)
 }
 
-
-
 test {
-  let a : NMNumber = NMInt(2)
-  let b : NMNumber = NMDouble(7.5)
+  let a : NMNum = NMInt(2)
+  let b : NMNum = NMDouble(7.5)
   println(a + b)
 }
