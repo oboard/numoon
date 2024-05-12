@@ -1,12 +1,10 @@
 {
   "name": "oboard/numoon",
-  "version": "0.1.0",
-  "deps": {
-    "peter-jerry-ye/wasi": "0.16.1"
-  },
+  "version": "0.1.2",
+  "deps": {},
   "readme": "README.md",
-  "repository": "",
-  "license": "Apache-2.0",
-  "keywords": [],
-  "description": ""
+  "repository": "https://github.com/oboard/numoon",
+  "license": "MIT License",
+  "keywords": ["moonbit", "numoon", "数值计算", "矩阵运算"],
+  "description": "MoonBit数值计算扩展，支持大型矩阵运算"
 }
