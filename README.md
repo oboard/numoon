@@ -72,6 +72,24 @@ println(list1)
 //  [0.9314055834969763, 0.8561914513327412, 0.7919828439328577]]
 ```
 
+### Matrix
+
+```moonbit
+let list1 = @nm.int_matrix([[1, 2, 3], [4, 5, 6]])
+```
+
+#### Matrix Operations
+```moonbit
+let m2 = @nm.int_matrix([[1, 2, 3], [4, 5, 6]])
+let m1 = @nm.int_matrix([[7, 8], [9, 10], [11, 12]])
+
+let result = @nm.dot(m1, m2)
+println(result)
+
+// Output: [[121.0 136.0 151.0]
+//  [153.0 172.0 191.0]
+//  [185.0 208.0 231.0]]
+```
 ## 🤝Contributing
 
 Contributions are always welcome! Feel free to fork the repository and submit a pull request.
