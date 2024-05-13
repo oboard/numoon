@@ -15,21 +15,27 @@ pub struct L {
 pub fn to_string(self : L) -> String {
   let mut result = "["
   let arr = self.value.to_array()
-  for i = 0; i < self.shape.rows; i = i + 1 {
-    if self.shape.cols > 1 {
+  let x2 = self.shape.rows > 0 && self.shape.cols > 0
+  for i = 0
+      i < match x2 {
+       false => 1
+       true => self.shape.cols
+     }
+      i = i + 1 {
+    if x2 {
       result = result + "["
     }
-    for j = 0; j < self.shape.cols; j = j + 1 {
-      result = result + arr[i * self.shape.cols + j].to_string()
-      if j < self.shape.cols - 1 {
-        result = result + ", "
+    for j = 0; j < self.shape.rows; j = j + 1 {
+      result = result + arr[i * self.shape.rows + j].to_string()
+      if j < self.shape.rows - 1 {
+        result = result + " "
       }
     }
-    if self.shape.cols > 1 {
+    if x2 {
       result = result + "]"
     }
-    if i < self.shape.rows - 1 {
-      result = result + ",\n "
+    if i < self.shape.cols - 1 {
+      result = result + "\n "
     }
   }
   result = result + "]"
@@ -39,7 +45,7 @@ pub fn to_string(self : L) -> String {
 pub fn L::from_array(array : Array[Double]) -> L {
   {
     value: array.map(to_NMDouble).to_list(),
-    shape: { rows: array.length(), cols: 1 },
+    shape: { rows: array.length(), cols: 0 },
   }
 }
 
@@ -47,38 +53,62 @@ pub fn L::from_array(array : Array[Double]) -> L {
 //   { value: array.map(NMNum::from_double).to_list() }
 // }
 
+pub fn int_matrix(matrix : Array[Array[Int]]) -> L {
+  let rows = matrix.length()
+  let cols = matrix[0].length()
+  let value = Array::make(rows * cols, to_NMInt(0))
+  for i = 0; i < rows; i = i + 1 {
+    for j = 0; j < cols; j = j + 1 {
+      value[i * cols + j] = to_NMInt(matrix[i][j])
+    }
+  }
+  { value: value.to_list(), shape: { rows, cols } }
+}
+
+pub fn double_matrix(matrix : Array[Array[Double]]) -> L {
+  let rows = matrix.length()
+  let cols = matrix[0].length()
+  let value = Array::make(rows * cols, to_NMDouble(0.0))
+  for i = 0; i < rows; i = i + 1 {
+    for j = 0; j < cols; j = j + 1 {
+      value[i * cols + j] = to_NMDouble(matrix[i][j])
+    }
+  }
+  { value: value.to_list(), shape: { rows, cols } }
+}
+
 pub fn int_arr(array : Array[Int]) -> L {
   {
     value: array.map(to_NMInt).to_list(),
-    shape: { rows: array.length(), cols: 1 },
+    shape: { rows: array.length(), cols: 0 },
   }
 }
 
 pub fn double_arr(array : Array[Double]) -> L {
   {
     value: array.map(to_NMDouble).to_list(),
-    shape: { rows: array.length(), cols: 1 },
+    shape: { rows: array.length(), cols: 0 },
   }
 }
 
 pub fn int_list(list : List[Int]) -> L {
-  { value: list.map(to_NMInt), shape: { rows: list.length(), cols: 1 } }
+  { value: list.map(to_NMInt), shape: { rows: list.length(), cols: 0 } }
 }
 
 pub fn double_list(list : List[Double]) -> L {
-  { value: list.map(to_NMDouble), shape: { rows: list.length(), cols: 1 } }
+  { value: list.map(to_NMDouble), shape: { rows: list.length(), cols: 0 } }
 }
 
 pub fn array(array : Array[NMNum]) -> L {
-  { value: array.to_list(), shape: { rows: array.length(), cols: 1 } }
+  { value: array.to_list(), shape: { rows: array.length(), cols: 0 } }
 }
 
 pub fn list(list : List[NMNum]) -> L {
-  { value: list, shape: { rows: list.length(), cols: 1 } }
+  { value: list, shape: { rows: list.length(), cols: 0 } }
 }
 
-pub fn reshape(self : L, rows : Int, cols : Int) -> Unit {
-  self.shape = { rows, cols }
+pub fn reshape(self : L, rows : Int, cols : Int) -> L {
+  { value: self.value, shape: { rows, cols } }
 }
 
 pub fn sum(self : L) -> NMNum {

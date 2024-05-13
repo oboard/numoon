@@ -10,8 +10,7 @@ pub fn sum() -> Unit {
 }
 
 pub fn reshape() -> Unit {
-  let list1 = @nm.int_arr([1, 2, 3, 4, 5, 6])
-  list1.reshape(2, 3)
+  let list1 = @nm.int_arr([1, 2, 3, 4, 5, 6]).reshape(2, 3)
   println(list1)
 }
 
@@ -20,15 +19,28 @@ pub fn random() -> Unit {
   println(list1)
 }
 
-pub fn matrixMul() -> Unit {
-  let m1 = @nm.int_arr([1, 2])
-  m1.reshape(2, 3)
-  let m2 = @nm.int_arr([1, 2])
-  m2.reshape(3, 2)
+pub fn matrixMul1() -> Unit {
+  let m1 = @nm.int_arr([1, 2, 3, 4]).reshape(2, 2)
+  let m2 = @nm.int_arr([1, 2, 3, 4]).reshape(2, 2)
+  let result = @nm.dot(m1, m2)
+  println(result)
+}
+
+pub fn matrixMul2() -> Unit {
+  let m1 = @nm.int_matrix([[1], [2]])
+  let m2 = @nm.int_matrix([[1, 2]])
+  let result = @nm.dot(m1, m2)
+  println(result)
+}
+
+pub fn matrixMul3() -> Unit {
+  let m2 = @nm.int_matrix([[1, 2, 3], [4, 5, 6]])
+  let m1 = @nm.int_matrix([[7, 8], [9, 10], [11, 12]])
+
   let result = @nm.dot(m1, m2)
   println(result)
 }
 
 test {
-  random()
+  matrixMul3()
 }
