@@ -92,7 +92,7 @@ println(result)
 ```
 ## 🤝Contributing
 
-Contributions are always welcome! Feel free to fork the repository and submit a pull request.
+We welcome contributions to Numoon! Please read our [contribution guide](CONTRIBUTING.md) to learn more.
 
 ## 👨‍💻Authors
 - @oboard

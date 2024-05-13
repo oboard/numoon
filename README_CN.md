@@ -93,6 +93,7 @@ println(result)
 ## 🤝贡献
 
 欢迎参与贡献，共建美好 MoonBit 社区！
+[贡献指南](CONTRIBUTING.md)
 
 ## 👨‍💻作者
 - @oboard
