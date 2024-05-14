@@ -13,7 +13,7 @@ pub fn rand(rows : Int, cols : Int) -> L {
   //   Err(err) => abort("Failed to get clock time: \(err)")
   // }
   for i = 0; i < length; i = i + 1 {
-    list = Cons(to_NMDouble(@random.RandomDouble::new(i).summon()), list)
+    list = Cons(to_NMDouble(@random.RandomDouble::new().summon()), list)
   }
   { value: list, shape }
 }
