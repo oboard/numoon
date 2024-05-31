@@ -90,6 +90,17 @@ println(result)
 //  [153.0 172.0 191.0]
 //  [185.0 208.0 231.0]]
 ```
+#### Matrix Transpose
+```moonbit
+let a = @nm.int_matrix([[1, 2], [3, 4]])
+
+println(a.transpose())
+
+// Output: [[1 3]
+//  [2 4]]
+```
+
+
 ## 🤝Contributing
 
 We welcome contributions to Numoon! Please read our [contribution guide](CONTRIBUTING.md) to learn more.
