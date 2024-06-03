@@ -100,6 +100,22 @@ println(a.transpose())
 //  [2 4]]
 ```
 
+### linspace
+start: The starting value of the sequence.
+
+stop: The ending value of the sequence.
+
+~num: The number of samples to generate, inclusive of both start and stop. Default is 50.
+
+```moonbit
+let a = linspace(0.0, 10.0, num=11)
+println(a)
+
+// Output: [0.0, 1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0]
+```
+
+
+
 
 ## 🤝Contributing
 

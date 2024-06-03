@@ -27,7 +27,7 @@ pub fn dot(a : L, b : L) -> L {
   let m = a.shape.rows
   let n = a.shape.cols
   let p = b.shape.cols
-  let arr = a.value.to_array();
+  let arr = a.value;
   let c = multiplyMatrices(
     arr.map(to_double),
     arr.map(to_double),
@@ -44,7 +44,7 @@ pub fn L::transpose(a : L) -> L {
   let m = a.shape.rows
   let n = a.shape.cols
   let b = Array::make(n * m, 0.0)
-  let arr = a.value.to_array();
+  let arr = a.value;
   for i = 0; i < m; i = i + 1 {
     for j = 0; j < n; j = j + 1 {
       let x = j * m + i
