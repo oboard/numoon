@@ -43,10 +43,7 @@ pub fn to_string(self : L) -> String {
 }
 
 pub fn L::from_array(array : Array[Double]) -> L {
-  {
-    value: array.map(to_NMDouble),
-    shape: { rows: array.length(), cols: 0 },
-  }
+  { value: array.map(to_NMDouble), shape: { rows: array.length(), cols: 0 } }
 }
 
 pub fn L::to_array(self : L) -> Array[Double] {
@@ -66,7 +63,7 @@ pub fn int_matrix(matrix : Array[Array[Int]]) -> L {
       value[i * cols + j] = to_NMInt(matrix[i][j])
     }
   }
-  { value: value, shape: { rows, cols } }
+  { value, shape: { rows, cols } }
 }
 
 pub fn double_matrix(matrix : Array[Array[Double]]) -> L {
@@ -78,37 +75,19 @@ pub fn double_matrix(matrix : Array[Array[Double]]) -> L {
       value[i * cols + j] = to_NMDouble(matrix[i][j])
     }
   }
-  { value: value, shape: { rows, cols } }
+  { value, shape: { rows, cols } }
 }
 
 pub fn int_arr(array : Array[Int]) -> L {
-  {
-    value: array.map(to_NMInt),
-    shape: { rows: array.length(), cols: 0 },
-  }
+  { value: array.map(to_NMInt), shape: { rows: array.length(), cols: 0 } }
 }
 
 pub fn double_arr(array : Array[Double]) -> L {
-  {
-    value: array.map(to_NMDouble),
-    shape: { rows: array.length(), cols: 0 },
-  }
-}
-
-pub fn int_list(list : List[Int]) -> L {
-  { value: list.to_array().map(to_NMInt), shape: { rows: list.length(), cols: 0 } }
-}
-
-pub fn double_list(list : List[Double]) -> L {
-  { value: list.to_array().map(to_NMDouble), shape: { rows: list.length(), cols: 0 } }
+  { value: array.map(to_NMDouble), shape: { rows: array.length(), cols: 0 } }
 }
 
 pub fn array(array : Array[NMNum]) -> L {
   { value: array, shape: { rows: array.length(), cols: 0 } }
-}
-
-pub fn list(list : List[NMNum]) -> L {
-  { value: list.to_array(), shape: { rows: list.length(), cols: 0 } }
 }
 
 pub fn reshape(self : L, rows : Int, cols : Int) -> L {
@@ -116,10 +95,11 @@ pub fn reshape(self : L, rows : Int, cols : Int) -> L {
 }
 
 pub fn sum(self : L) -> NMNum {
-  loop self.value.to_list(), NMNum::from_int(0) {
-    Nil, acc => acc
-    Cons(x, rest), acc => continue rest, x + acc
+  let mut sum = 0.0
+  for i = 0; i < self.value.length(); i = i + 1 {
+    sum = sum + self.value[i].to_double()
   }
+  to_NMDouble(sum)
 }
 
 pub fn op_add(self : L, other : L) -> L {
