@@ -12,6 +12,10 @@ pub fn to_string(self : NMNum) -> String {
   }
 }
 
+pub fn output(self : NMNum, logger : Logger) -> Unit {
+  logger.write_string(self.to_string())
+}
+
 pub fn op_add(self : NMNum, that : NMNum) -> NMNum {
   match (self, that) {
     (NMInt(a), NMInt(b)) => NMInt(a + b)
