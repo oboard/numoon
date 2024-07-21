@@ -12,6 +12,10 @@ pub struct L {
   mut shape : NMShape
 } derive(Debug, Eq)
 
+pub fn output(self : L, logger : Logger) -> Unit {
+  logger.write_string(self.to_string())
+}
+
 pub fn to_string(self : L) -> String {
   let mut result = "["
   let arr = self.value
