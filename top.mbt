@@ -30,19 +30,25 @@ fn matrix() -> Array[(String, @nm.L)] {
 }
 
 test {
-  inspect(add(), content="[3 4 5]")!
-  inspect(sum(), content="21.0")!
-  inspect(reshape(), content=
-    #|[[1 2]
-    #| [3 4]
-    #| [5 6]]
-  )!
-  inspect(random(), content=
-    #|[[0.0 0.0]
-    #| [0.0 0.0]
-    #| [0.0 0.0]]
-  )!
-  inspect(
+  inspect!(add(), content="[3 4 5]")
+  inspect!(sum(), content="21.0")
+  inspect!(
+    reshape(),
+    content=
+      #|[[1 2]
+      #| [3 4]
+      #| [5 6]]
+    ,
+  )
+  inspect!(
+    random(),
+    content=
+      #|[[0.0 0.0]
+      #| [0.0 0.0]
+      #| [0.0 0.0]]
+    ,
+  )
+  inspect!(
     matrix(),
     content=
       #|[(add, [[6 8]
@@ -56,5 +62,5 @@ test {
       #| [15.0 22.0]]), (transpose, [[1.0 3.0]
       #| [2.0 4.0]])]
     ,
-  )!
+  )
 }

@@ -2,7 +2,7 @@ pub enum NMNum {
   NMInt(Int)
   NMDouble(Double)
   NMString(String)
-} derive(Debug, Eq)
+} derive(Eq)
 
 pub fn to_string(self : NMNum) -> String {
   match self {

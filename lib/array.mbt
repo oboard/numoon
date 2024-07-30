@@ -1,7 +1,7 @@
 pub struct NMShape {
   mut rows : Int
   mut cols : Int
-} derive(Show, Debug, Eq)
+} derive(Show, Eq)
 
 pub fn length(self : NMShape) -> Int {
   self.rows * self.cols
@@ -10,7 +10,7 @@ pub fn length(self : NMShape) -> Int {
 pub struct L {
   mut value : Array[NMNum]
   mut shape : NMShape
-} derive(Debug, Eq)
+} derive(Eq)
 
 pub fn output(self : L, logger : Logger) -> Unit {
   logger.write_string(self.to_string())
