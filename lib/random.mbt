@@ -12,9 +12,9 @@ pub fn rand(rows : Int, cols : Int) -> L {
   //   Ok(time) => time.to_int()
   //   Err(err) => abort("Failed to get clock time: \(err)")
   // }
-  let state = @random.RandomState::new()
+  let rand = @random.Rand::new()
   for i = 0; i < length; i = i + 1 {
-    arr.push(to_NMDouble(@random.gen_double(state)))
+    arr.push(to_NMDouble(rand.double()))
   }
   { value: arr, shape }
 }
