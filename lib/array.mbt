@@ -21,10 +21,11 @@ pub fn to_string(self : L) -> String {
   let arr = self.value
   let x2 = self.shape.rows > 0 && self.shape.cols > 0
   for i = 0
-      i < match x2 {
+      i <
+     (match x2 {
        false => 1
        true => self.shape.cols
-     }
+     })
       i = i + 1 {
     if x2 {
       result = result + "["
