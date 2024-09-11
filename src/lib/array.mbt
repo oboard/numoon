@@ -56,7 +56,7 @@ pub fn array(json : Json) -> L {
 }
 
 pub fn int_array(arr : Array[Int]) -> L {
-  { value: arr.map(to_NMInt), shape: [arr.length()] }
+  { value: arr.map(NMNum::NMInt), shape: [arr.length()] }
 }
 
 pub fn L::from(json : Json) -> L {
@@ -77,11 +77,11 @@ pub fn L::from(json : Json) -> L {
               shape[level] = array.length()
             }
           }
-          Number(number) => value.push(to_NMDouble(number))
-          String(string) => value.push(to_NMString(string))
-          True => value.push(to_NMInt(1))
-          False => value.push(to_NMInt(0))
-          Null => value.push(to_NMInt(0))
+          Number(number) => value.push(NMDouble(number))
+          String(string) => value.push(NMString(string))
+          True => value.push(NMInt(1))
+          False => value.push(NMInt(0))
+          Null => value.push(NMInt(0))
           Object(obj) => obj.values().each(fn(value) { append(level, value) })
         }
       }
@@ -94,7 +94,7 @@ pub fn L::from(json : Json) -> L {
 }
 
 pub fn L::from_array(array : Array[Double]) -> L {
-  { value: array.map(to_NMDouble), shape: [array.length(), 1] }
+  { value: array.map(NMNum::NMDouble), shape: [array.length(), 1] }
 }
 
 pub fn L::to_array(self : L) -> Array[Double] {
@@ -113,7 +113,7 @@ pub fn sum(self : L) -> NMNum {
   for i = 0; i < self.value.length(); i = i + 1 {
     sum = sum + self.value[i].to_double()
   }
-  to_NMDouble(sum)
+  NMDouble(sum)
 }
 
 pub fn prod(self : L) -> NMNum {
@@ -121,7 +121,7 @@ pub fn prod(self : L) -> NMNum {
   for i = 0; i < self.value.length(); i = i + 1 {
     prod = prod * self.value[i].to_double()
   }
-  to_NMDouble(prod)
+  NMDouble(prod)
 }
 
 pub fn op_add(self : L, other : L) -> L {

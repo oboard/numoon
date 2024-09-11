@@ -84,17 +84,6 @@ pub fn NMNum::from_double(num : Double) -> NMNum {
   NMDouble(num)
 }
 
-pub fn to_NMInt(i : Int) -> NMNum {
-  NMInt(i)
-}
-
-pub fn to_NMDouble(d : Double) -> NMNum {
-  NMDouble(d)
-}
-pub fn to_NMString(d : String) -> NMNum {
-  NMString(d)
-}
-
 test {
   let a : NMNum = NMInt(2)
   let b : NMNum = NMDouble(7.5)
