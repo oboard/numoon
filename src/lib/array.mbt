@@ -1,7 +1,9 @@
 pub fn length(self : L) -> Int {
-  let mut count = 0
-  self.shape.each(fn(x) { count *= x })
-  count
+  match self.shape.length() {
+    0 => 0
+    1 => self.shape[0]
+    _ => self.shape.fold(init=1, fn(acc, x) { acc * x })
+  }
 }
 
 pub struct L {
@@ -9,12 +11,15 @@ pub struct L {
   mut shape : Array[Int]
 } derive(Eq)
 
+pub fn op_get(self : L, index : Int) -> NMNum {
+  self.value[index]
+}
+
 pub fn output(self : L, logger : Logger) -> Unit {
   logger.write_string(self.to_string())
 }
 
-pub fn to_string(self : L) -> String {
-  // 根据 shape 生成 Json Array
+pub fn to_json(self : L) -> Json {
   let { value, shape } = self
   fn buildArray(val : Array[NMNum], shape : Array[Int]) -> Json {
     if shape.length() == 1 {
@@ -45,7 +50,11 @@ pub fn to_string(self : L) -> String {
     Array(result)
   }
 
-  buildArray(value, shape).stringify()
+  buildArray(value, shape)
+}
+
+pub fn to_string(self : L) -> String {
+  self.to_json().stringify()
 }
 
 pub fn array(json : Json) -> L {
