@@ -38,25 +38,22 @@ test {
 
   inspect!(reshape2(), content="[[1,2],[3,4],[5,6]]")
 
-  // matrix
-  fn matrix() {
-    let a = @nm.array([[1, 2], [3, 4]])
-    let b = @nm.array([[5, 6], [7, 8]])
-    [
-      ("add", a + b),
-      ("reshape", a.reshape([1, 4])),
-      ("matrix", @nm.array([[1, 2], [3, 4]])),
-      ("dot", @nm.dot(a, b)),
-      ("transpose", a.transpose()),
-    ]
+  // matrix multiplication
+  fn matrix_multiplication() {
+    let matrix1 = @nm.array([[1, 2, 3], [4, 5, 6]])
+    let matrix2 = @nm.array([[7, 8], [9, 10], [11, 12]])
+    // or matrix1.matmul(matrix2)
+    @nm.matmul(matrix1, matrix2)
   }
 
-  inspect!(
-    matrix(),
-    content=
-      #|[("add", [[6,8],[10,12]]), ("reshape", [[1,2,3,4]]), ("matrix", [[1,2],[3,4]]), ("dot", [[7,10],[15,22]]), ("transpose", [[1,3],[2,4]])]
-    ,
-  )
+  inspect!(matrix_multiplication(), content="[[58,64],[139,154]]")
+
+  // transpose
+  fn transpose() {
+    let matrix = @nm.array([[1, 2, 3], [4, 5, 6]])
+    matrix.transpose()
+  }
+  inspect!(transpose(), content="[[1,4],[2,5],[3,6]]")
 
   // zeros, ones
   let matrix1 = @nm.zeros(9).reshape([3, 3])

@@ -30,10 +30,7 @@ pub fn to_string(self : L) -> String {
     let totalLength = prod(int_array(shape)).to_int()
     // 确保值的数量与形状匹配
     if val.length() != totalLength {
-      println(
-        "Error: The total length of shape does not match the length of values.",
-      )
-      panic()
+      abort("The total length of shape does not match the length of values.")
     }
     // 递归构建多维数组
     for i = 0; i < shape[0]; i = i + 1 {
@@ -49,7 +46,7 @@ pub fn to_string(self : L) -> String {
   }
 
   buildArray(value, shape).stringify()
-  }
+}
 
 pub fn array(json : Json) -> L {
   L::from(json)
@@ -57,6 +54,10 @@ pub fn array(json : Json) -> L {
 
 pub fn int_array(arr : Array[Int]) -> L {
   { value: arr.map(NMNum::NMInt), shape: [arr.length()] }
+}
+
+pub fn double_array(arr : Array[Double]) -> L {
+  { value: arr.map(NMNum::NMDouble), shape: [arr.length(), 1] }
 }
 
 pub fn L::from(json : Json) -> L {
