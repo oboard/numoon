@@ -72,4 +72,9 @@ test {
   inspect!(rows, content="[0,1,2,3,4]")
   let cols = @nm.arange(start=1, end=5, step=0.5)
   inspect!(cols, content="[1,1.5,2,2.5,3,3.5,4,4.5]")
+
+
+  // pi
+  let pi = @nm.pi
+  inspect!(pi, content="3.141592653589793")
 }
