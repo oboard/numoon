@@ -4,8 +4,8 @@
   "deps": {},
   "readme": "README.md",
   "repository": "https://github.com/oboard/numoon",
-  "license": "MIT",
-  "keywords": ["moonbit", "numoon", "数值计算", "矩阵运算"],
-  "description": "MoonBit数值计算扩展，支持大型矩阵运算",
+  "license": "Apache-2.0",
+  "keywords": ["moonbit", "numoon", "matrix", "math"],
+  "description": "MoonBit Mathematical Operation",
   "source": "src"
 }
