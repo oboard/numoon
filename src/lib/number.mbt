@@ -91,6 +91,9 @@ pub fn to_NMInt(i : Int) -> NMNum {
 pub fn to_NMDouble(d : Double) -> NMNum {
   NMDouble(d)
 }
+pub fn to_NMString(d : String) -> NMNum {
+  NMString(d)
+}
 
 test {
   let a : NMNum = NMInt(2)

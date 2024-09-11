@@ -20,7 +20,7 @@ Here are some key features of Numoon:
 2. Derived Objects (such as Masked Arrays and Matrices): Numoon allows users to create special arrays, like masked arrays, which handle missing or invalid data.
 
 3. Extensive Mathematical Function Library: Numoon has a vast array of mathematical functions, including linear algebra, Fourier transforms, and random number generation.
-<!-- 
+<!--
 4. Vectorized Operations: Numoon's array operations are vectorized, meaning you can perform operations on arrays without explicit loops.
 
 5. Support for Various Data Types: Numoon supports a wide range of data types, including integers, floating-point numbers, complex numbers, and more.
@@ -47,41 +47,52 @@ To use Numoon in your MoonBit program, simply import the library using the follo
 
 You can then create an NMArray object using the following code:
 
-
 ### Creating Arrays
 
 ```moonbit
-a = @nm.int_array([1, 2, 3])
-b = @nm.int_array([1, 2, 3])
-printLn(a + b) 
+a = @nm.array([1, 2, 3])
+b = @nm.array([1, 2, 3])
+println(a + b)
 // Output: [2, 4, 6]
 ```
 
-This creates a 1-dimensional array of integers and performs vectorized addition.
+# Array Operations
 
 ```moonbit
-a = @nm.double_array([1.0, 2.0, 3.0])
+a = @nm.array([1, 2, 3])
+println(a.sum())
+println(a.prod())
+// Output: 6 6
+```
+
+### Reshape
+
+```moonbit
+let a = @nm.array([[1, 2, 3], [4, 5, 6]])
+println(a.reshape(3, 2))
+// Output: [[1, 2], [3, 4], [5, 6]]
 ```
 
 ### Random Number Generation
 
 ```moonbit
-let list1 = @nm.rand(2, 3)
+let list1 = @nm.rand(6)
 println(list1)
 // Output: [[0.2893123275883688, 0.33959090191249325, 0.1521095035725017],
-//  [0.9314055834969763, 0.8561914513327412, 0.7919828439328577]]
+//  0.9314055834969763, 0.8561914513327412, 0.7919828439328577]
 ```
 
 ### Matrix
 
 ```moonbit
-let list1 = @nm.int_matrix([[1, 2, 3], [4, 5, 6]])
+let list1 = @nm.array([[1, 2, 3], [4, 5, 6]])
 ```
 
 #### Matrix Operations
+
 ```moonbit
-let m2 = @nm.int_matrix([[1, 2, 3], [4, 5, 6]])
-let m1 = @nm.int_matrix([[7, 8], [9, 10], [11, 12]])
+let m2 = @nm.array([[1, 2, 3], [4, 5, 6]])
+let m1 = @nm.array([[7, 8], [9, 10], [11, 12]])
 
 let result = @nm.dot(m1, m2)
 println(result)
@@ -90,9 +101,11 @@ println(result)
 //  [153.0 172.0 191.0]
 //  [185.0 208.0 231.0]]
 ```
+
 #### Matrix Transpose
+
 ```moonbit
-let a = @nm.int_matrix([[1, 2], [3, 4]])
+let a = @nm.array([[1, 2], [3, 4]])
 
 println(a.transpose())
 
@@ -101,6 +114,7 @@ println(a.transpose())
 ```
 
 ### linspace
+
 start: The starting value of the sequence.
 
 stop: The ending value of the sequence.
@@ -108,20 +122,18 @@ stop: The ending value of the sequence.
 ~num: The number of samples to generate, inclusive of both start and stop. Default is 50.
 
 ```moonbit
-let a = linspace(0.0, 10.0, num=11)
+let a = @nm.linspace(0.0, 10.0, num=11)
 println(a)
 
 // Output: [0.0, 1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0]
 ```
-
-
-
 
 ## 🤝Contributing
 
 We welcome contributions to Numoon! Please read our [contribution guide](CONTRIBUTING.md) to learn more.
 
 ## 👨‍💻Authors
+
 - @oboard
 - @Yorkin
 

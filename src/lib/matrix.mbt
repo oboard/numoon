@@ -21,30 +21,24 @@ fn multiplyMatrices(
 }
 
 pub fn dot(a : L, b : L) -> L {
-  if a.shape.cols != b.shape.rows {
+  if a.shape[0] != b.shape[1] {
     abort("Matrix dimensions do not match for dot product")
   }
-  let m = a.shape.rows
-  let n = a.shape.cols
-  let p = b.shape.cols
-  let arr = a.value;
-  let c = multiplyMatrices(
-    arr.map(to_double),
-    arr.map(to_double),
-    m,
-    n,
-    p,
-  )
+  let m = a.shape[0]
+  let n = a.shape[1]
+  let p = b.shape[0]
+  let arr = a.value
+  let c = multiplyMatrices(arr.map(to_double), arr.map(to_double), m, n, p)
   let cL = from_array(c)
-  cL.shape = { rows: m, cols: p }
+  cL.shape = [m, p]
   cL
 }
 
 pub fn L::transpose(a : L) -> L {
-  let m = a.shape.rows
-  let n = a.shape.cols
+  let m = a.shape[0]
+  let n = a.shape[1]
   let b = Array::make(n * m, 0.0)
-  let arr = a.value;
+  let arr = a.value
   for i = 0; i < m; i = i + 1 {
     for j = 0; j < n; j = j + 1 {
       let x = j * m + i
@@ -53,6 +47,6 @@ pub fn L::transpose(a : L) -> L {
     }
   }
   let cL = from_array(b)
-  cL.shape = { rows: n, cols: m }
+  cL.shape = [n, m]
   cL
 }
