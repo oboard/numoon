@@ -40,6 +40,19 @@ Numoon 是 MoonBit 中科学计算和数据分析不可或缺的工具，在物�
 moon add oboard/numoon
 ```
 
+配置 MoonBit 项目的 `moon.pkg.json` 文件：
+
+```json
+{
+  "import": [
+    {
+      "path": "oboard/numoon/lib",
+      "alias": "nm"
+    } 
+  ]
+}
+```
+
 这将安装 Numoon 的最新版本及其依赖项。
 
 要在 MoonBit 程序中使用 Numoon，只需使用以下代码导入库：

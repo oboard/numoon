@@ -41,6 +41,18 @@ To get started with Numoon, you can simply install it using the following comman
 moon add oboard/numoon
 ```
 
+Configure your MoonBit project `moon.pkg.json` file:
+```json
+{
+  "import": [
+    {
+      "path": "oboard/numoon/lib",
+      "alias": "nm"
+    } 
+  ]
+}
+```
+
 This will install the latest version of Numoon and its dependencies.
 
 To use Numoon in your MoonBit program, simply import the library using the following code:
