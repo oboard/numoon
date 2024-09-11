@@ -27,7 +27,7 @@ let sin_ = [
   0x0.02222222221EFA06A21A, -0x0.2AAAAAAAAAAA90C58591,
 ]
 
-pub fn sin(x : Double) -> Double {
+pub fn math_sin(x : Double) -> Double {
   if Double::is_inf(x) || Double::is_nan(x) {
     x
   } else {
@@ -84,7 +84,7 @@ let cos_ = [
   0x0.0001A01A019C844F3E07, -0x0.005B05B05B053E453C34, 0x0.0AAAAAAAAAAAA55A47E1,
 ]
 
-pub fn cos(x : Double) -> Double {
+pub fn math_cos(x : Double) -> Double {
   if Double::is_inf(x) || Double::is_nan(x) {
     x
   } else {
@@ -144,7 +144,7 @@ let tan_q = [
   -0x335FC07.97CB461BD8709633FE8F,
 ]
 
-pub fn tan(x : Double) -> Double {
+pub fn math_tan(x : Double) -> Double {
   if Double::is_inf(x) || Double::is_nan(x) {
     x
   } else {
@@ -192,7 +192,7 @@ let morebits = 6.123233995736765886130e-17
 
 let tan3pio8 = 2.41421356237309504880
 
-fn xatan(x : Double) -> Double {
+fn math_xatan(x : Double) -> Double {
   let z = x * x
   x *
   (
@@ -209,27 +209,27 @@ fn xatan(x : Double) -> Double {
   x
 }
 
-fn satan(x : Double) -> Double {
+fn math_satan(x : Double) -> Double {
   if x <= 0.66 {
-    xatan(x)
+    math_xatan(x)
   } else if x > tan3pio8 {
-    pi / 2.0 - xatan(1.0 / x) + morebits
+    pi / 2.0 - math_xatan(1.0 / x) + morebits
   } else {
-    pi / 4.0 + xatan((x - 1.0) / (x + 1.0)) + 0.5 * morebits
+    pi / 4.0 + math_xatan((x - 1.0) / (x + 1.0)) + 0.5 * morebits
   }
 }
 
-pub fn arctan(x : Double) -> Double {
+pub fn math_arctan(x : Double) -> Double {
   if Double::is_inf(x) || Double::is_nan(x) || x == 0.0 {
     x
   } else if x > 0.0 {
-    satan(x)
+    math_satan(x)
   } else {
-    -satan(-x)
+    -math_satan(-x)
   }
 }
 
-pub fn arcsin(x : Double) -> Double {
+pub fn math_arcsin(x : Double) -> Double {
   if Double::is_inf(x) || Double::is_nan(x) || x == 0.0 {
     x
   } else {
@@ -238,53 +238,53 @@ pub fn arcsin(x : Double) -> Double {
       @double.not_a_number
     } else {
       let temp = (1.0 - x_ * x_).sqrt()
-      (if x > 0.7 { pi / 2.0 - satan(temp / x_) } else { satan(x_ / temp) }) *
+      (if x > 0.7 { pi / 2.0 - math_satan(temp / x_) } else { math_satan(x_ / temp) }) *
       x.signum()
     }
   }
 }
 
-pub fn arccos(x : Double) -> Double {
+pub fn math_arccos(x : Double) -> Double {
   if Double::is_inf(x) || Double::is_nan(x) {
     x
   } else {
-    pi / 2.0 - arcsin(x)
+    pi / 2.0 - math_arcsin(x)
   }
 }
 
-pub fn sinh(x : Double) -> Double {
+pub fn math_sinh(x : Double) -> Double {
   (x.exp() - (-x).exp()) / 2.0
 }
 
-pub fn cosh(x : Double) -> Double {
+pub fn math_cosh(x : Double) -> Double {
   (x.exp() + (-x).exp()) / 2.0
 }
 
-pub fn tanh(x : Double) -> Double {
+pub fn math_tanh(x : Double) -> Double {
   (x.exp() - (-x).exp()) / (x.exp() + (-x).exp())
 }
 
-pub fn arcsinh(x : Double) -> Double {
+pub fn math_arcsinh(x : Double) -> Double {
   x.log10() + (x * x + 1.0).sqrt()
 }
 
-pub fn arccosh(x : Double) -> Double {
+pub fn math_arccosh(x : Double) -> Double {
   (x + (x * x - 1.0).sqrt()).log10()
 }
 
-pub fn arctanh(x : Double) -> Double {
+pub fn math_arctanh(x : Double) -> Double {
   ((1.0 + x).ln() - (1.0 - x).ln()) / 2.0
 }
 
-pub fn sinc(x : Double) -> Double {
+pub fn math_sinc(x : Double) -> Double {
   if x == 0.0 {
     1.0
   } else {
-    sin(pi * x) / (pi * x)
+    math_sin(pi * x) / (pi * x)
   }
 }
 
-pub fn arctan2(y : Double, x : Double) -> Double {
+pub fn math_arctan2(y : Double, x : Double) -> Double {
   if x == 0.0 {
     if y > 0.0 {
       pi / 2.0
@@ -298,19 +298,19 @@ pub fn arctan2(y : Double, x : Double) -> Double {
     if z < 0.0 {
       z = -z
       if x < 0.0 {
-        -arctan(z) - pi
+        -math_arctan(z) - pi
       } else {
-        -arctan(z) + pi
+        -math_arctan(z) + pi
       }
     } else if x < 0.0 {
-      -arctan(z) + pi
+      -math_arctan(z) + pi
     } else {
-      arctan(z)
+      math_arctan(z)
     }
   }
 }
 
-pub fn pow(x : Double, y : Double) -> Double {
+pub fn math_pow(x : Double, y : Double) -> Double {
   if x == 0.0 && y == 0.0 {
     @double.not_a_number
   } else if x == 0.0 {
@@ -342,32 +342,44 @@ pub fn pow(x : Double, y : Double) -> Double {
   }
 }
 
-pub fn degrees(x : Double) -> Double {
+pub fn math_degrees(x : Double) -> Double {
   x * 180.0 / pi
 }
 
-pub fn radians(x : Double) -> Double {
+pub fn math_radians(x : Double) -> Double {
   x * pi / 180.0
 }
 
-pub fn deg2rad(x : Double) -> Double {
+pub fn math_deg2rad(x : Double) -> Double {
   x * pi / 180.0
 }
 
-pub fn rad2deg(x : Double) -> Double {
+pub fn math_rad2deg(x : Double) -> Double {
   x * 180.0 / pi
+}
+
+pub fn math_exp(x : Double) -> Double {
+  x.exp()
+}
+
+pub fn math_ln(x : Double) -> Double {
+  x.ln()
 }
 
 test {
-  inspect!(sinc(1.0), content="3.8982468850708534e-17")
-  inspect!(sinh(1.0), content="1.1752011936438014")
-  inspect!(cosh(1.0), content="1.5430806348152437")
-  inspect!(tanh(1.0), content="0.7615941559557649")
-  inspect!(arcsinh(1.0), content="1.4142135623730951")
-  inspect!(arccosh(1.0), content="0")
-  inspect!(arctanh(0.5), content="0.5493061443340548")
-  inspect!(arctan2(1.0, 1.0), content="0.7853981633974483")
-  inspect!(degrees(pi), content="180")
-  inspect!(radians(180.0), content="3.141592653589793")
-  inspect!(pow(2.0, 3.0), content="8")
+  inspect!(math_sinc(1.0), content="3.8982468850708534e-17")
+  inspect!(math_sinh(1.0), content="1.1752011936438014")
+  inspect!(math_cosh(1.0), content="1.5430806348152437")
+  inspect!(math_tanh(1.0), content="0.7615941559557649")
+  inspect!(math_arcsinh(1.0), content="1.4142135623730951")
+  inspect!(math_arccosh(1.0), content="0")
+  inspect!(math_arctanh(0.5), content="0.5493061443340548")
+  inspect!(math_arctan2(1.0, 1.0), content="0.7853981633974483")
+  inspect!(math_degrees(pi), content="180")
+  inspect!(math_radians(180.0), content="3.141592653589793")
+  inspect!(math_pow(2.0, 3.0), content="8")
+  inspect!(math_exp(1.0), content="2.718281828459045")
+  inspect!(math_ln(2.718281828459045), content="1")
+  inspect!(math_deg2rad(180.0), content="3.141592653589793")
+  inspect!(math_rad2deg(3.141592653589793), content="180")
 }

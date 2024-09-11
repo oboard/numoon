@@ -15,6 +15,18 @@ pub fn op_get(self : L, index : Int) -> NMNum {
   self.value[index]
 }
 
+pub fn op_set(self : L, index : Int, value : NMNum) -> L {
+  self.value[index] = value
+  self
+}
+
+pub fn op_as_view(self : L, ~start : Int, ~end? : Int) -> L {
+  let value = self.value
+  let start = start
+  let end = end.or(value.length())
+  { value: value[start:end].iter().to_array(), shape: [value.length()] }
+}
+
 pub fn output(self : L, logger : Logger) -> Unit {
   logger.write_string(self.to_string())
 }

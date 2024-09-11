@@ -104,15 +104,34 @@ test "pi" {
 
 // trigonometric functions
 test "trigonometric_functions" {
-  inspect!(@nm.sinc(1.0), content="3.8982468850708534e-17")
-  inspect!(@nm.sinh(1.0), content="1.1752011936438014")
-  inspect!(@nm.cosh(1.0), content="1.5430806348152437")
-  inspect!(@nm.tanh(1.0), content="0.7615941559557649")
-  inspect!(@nm.arcsinh(1.0), content="1.4142135623730951")
-  inspect!(@nm.arccosh(1.0), content="0")
-  inspect!(@nm.arctanh(0.5), content="0.5493061443340548")
-  inspect!(@nm.arctan2(1.0, 1.0), content="0.7853981633974483")
-  inspect!(@nm.degrees(@nm.pi), content="180")
-  inspect!(@nm.radians(180.0), content="3.141592653589793")
-  inspect!(@nm.pow(2.0, 3.0), content="8")
+  inspect!(@nm.math_sinc(1.0), content="3.8982468850708534e-17")
+  inspect!(@nm.math_sinh(1.0), content="1.1752011936438014")
+  inspect!(@nm.math_cosh(1.0), content="1.5430806348152437")
+  inspect!(@nm.math_tanh(1.0), content="0.7615941559557649")
+  inspect!(@nm.math_arcsinh(1.0), content="1.4142135623730951")
+  inspect!(@nm.math_arccosh(1.0), content="0")
+  inspect!(@nm.math_arctanh(0.5), content="0.5493061443340548")
+  inspect!(@nm.math_arctan2(1.0, 1.0), content="0.7853981633974483")
+  inspect!(@nm.math_degrees(@nm.pi), content="180")
+  inspect!(@nm.math_radians(180.0), content="3.141592653589793")
+  inspect!(@nm.math_pow(2.0, 3.0), content="8")
+}
+
+test "functions on arrays" {
+  inspect!(
+    @nm.array([0.1, 0.2, 0.3])
+    .sin()
+    .cos()
+    .arccos()
+    .arcsin()
+    .multiply(10)
+    .round()
+    .divide(10),
+    content="[0.1,0.2,0.3]",
+  )
+}
+
+test "slice" {
+  let arr = @nm.array([1, 2, 3, 4, 5])
+  inspect!(arr[2:4], content="[3,4]")
 }
