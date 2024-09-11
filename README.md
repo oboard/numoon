@@ -7,6 +7,29 @@
 - [Contributing](#-contributing)
 - [License](#-license)
 
+## ✨New Features
+
+```rust
+test "functions on arrays" {
+  inspect!(
+    @nm.array([0.1, 0.2, 0.3])
+    .sin()
+    .cos()
+    .arccos()
+    .arcsin()
+    .multiply(10)
+    .round()
+    .divide(10),
+    content="[0.1,0.2,0.3]",
+  )
+}
+
+test "slice" {
+  let arr = @nm.array([1, 2, 3, 4, 5])
+  inspect!(arr[2:4], content="[3,4]")
+}
+```
+
 ## ✨Introduction
 
 **Numoon** is an open-source MoonBit library that provides support for multi-dimensional array objects and functions for efficiently operating on these arrays.
