@@ -272,12 +272,90 @@ pub fn arccosh(x : Double) -> Double {
   (x + (x * x - 1.0).sqrt()).log10()
 }
 
+pub fn arctanh(x : Double) -> Double {
+  ((1.0 + x).ln() - (1.0 - x).ln()) / 2.0
+}
+
 pub fn sinc(x : Double) -> Double {
   if x == 0.0 {
     1.0
   } else {
     sin(pi * x) / (pi * x)
   }
+}
+
+pub fn arctan2(y : Double, x : Double) -> Double {
+  if x == 0.0 {
+    if y > 0.0 {
+      pi / 2.0
+    } else if y < 0.0 {
+      -pi / 2.0
+    } else {
+      @double.not_a_number
+    }
+  } else {
+    let mut z = y / x
+    if z < 0.0 {
+      z = -z
+      if x < 0.0 {
+        -arctan(z) - pi
+      } else {
+        -arctan(z) + pi
+      }
+    } else if x < 0.0 {
+      -arctan(z) + pi
+    } else {
+      arctan(z)
+    }
+  }
+}
+
+pub fn pow(x : Double, y : Double) -> Double {
+  if x == 0.0 && y == 0.0 {
+    @double.not_a_number
+  } else if x == 0.0 {
+    if y > 0.0 {
+      0.0
+    } else {
+      @double.not_a_number
+    }
+  } else if y == 0.0 {
+    1.0
+  } else if y == 1.0 {
+    x
+  } else {
+    let mut z = x
+    let mut n = y.to_int64()
+    if n < 0 {
+      z = 1.0 / z
+      n = -n
+    }
+    let mut result = 1.0
+    while n > 0 {
+      if n.land(1) == 1 {
+        result *= z
+      }
+      z *= z
+      n = n.shr(1)
+    }
+    result
+  }
+}
+
+pub fn degrees(x : Double) -> Double {
+  x * 180.0 / pi
+}
+
+pub fn radians(x : Double) -> Double {
+  x * pi / 180.0
+}
+
+pub fn deg2rad(x : Double) -> Double {
+  x * pi / 180.0
+}
+
+pub fn rad2deg(x : Double) -> Double {
+  x * 180.0 / pi
 }
 
 test {
@@ -287,5 +365,9 @@ test {
   inspect!(tanh(1.0), content="0.7615941559557649")
   inspect!(arcsinh(1.0), content="1.4142135623730951")
   inspect!(arccosh(1.0), content="0")
-  inspect!(arcsinh(0.0), content="-Infinity")
+  inspect!(arctanh(0.5), content="0.5493061443340548")
+  inspect!(arctan2(1.0, 1.0), content="0.7853981633974483")
+  inspect!(degrees(pi), content="180")
+  inspect!(radians(180.0), content="3.141592653589793")
+  inspect!(pow(2.0, 3.0), content="8")
 }

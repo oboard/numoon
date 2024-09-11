@@ -60,10 +60,7 @@ test {
 
   // zeros, ones
   let matrix1 = @nm.zeros(9).reshape([3, 3])
-  inspect!(
-    matrix1,
-    content="[[0,0,0],[0,0,0],[0,0,0]]",
-  )
+  inspect!(matrix1, content="[[0,0,0],[0,0,0],[0,0,0]]")
   let matrix2 = @nm.ones(6).reshape([2, 3])
   inspect!(matrix2, content="[[1,1,1],[1,1,1]]")
 
@@ -73,8 +70,19 @@ test {
   let cols = @nm.arange(start=1, end=5, step=0.5)
   inspect!(cols, content="[1,1.5,2,2.5,3,3.5,4,4.5]")
 
-
   // pi
-  let pi = @nm.pi
-  inspect!(pi, content="3.141592653589793")
+  inspect!(@nm.pi, content="3.141592653589793")
+
+  // trigonometric functions
+  inspect!(@nm.sinc(1.0), content="3.8982468850708534e-17")
+  inspect!(@nm.sinh(1.0), content="1.1752011936438014")
+  inspect!(@nm.cosh(1.0), content="1.5430806348152437")
+  inspect!(@nm.tanh(1.0), content="0.7615941559557649")
+  inspect!(@nm.arcsinh(1.0), content="1.4142135623730951")
+  inspect!(@nm.arccosh(1.0), content="0")
+  inspect!(@nm.arctanh(0.5), content="0.5493061443340548")
+  inspect!(@nm.arctan2(1.0, 1.0), content="0.7853981633974483")
+  inspect!(@nm.degrees(pi), content="180")
+  inspect!(@nm.radians(180.0), content="3.141592653589793")
+  inspect!(@nm.pow(2.0, 3.0), content="8")
 }
