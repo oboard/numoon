@@ -82,7 +82,7 @@ test {
   inspect!(@nm.arccosh(1.0), content="0")
   inspect!(@nm.arctanh(0.5), content="0.5493061443340548")
   inspect!(@nm.arctan2(1.0, 1.0), content="0.7853981633974483")
-  inspect!(@nm.degrees(pi), content="180")
+  inspect!(@nm.degrees(@nm.pi), content="180")
   inspect!(@nm.radians(180.0), content="3.141592653589793")
   inspect!(@nm.pow(2.0, 3.0), content="8")
 }
