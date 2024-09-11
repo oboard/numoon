@@ -38,7 +38,7 @@ Numoon is an indispensable tool for scientific computing and data analysis in Mo
 To get started with Numoon, you can simply install it using the following command:
 
 ```bash
-moon install oboard/numoon
+moon add oboard/numoon
 ```
 
 This will install the latest version of Numoon and its dependencies.
