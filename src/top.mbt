@@ -57,4 +57,19 @@ test {
       #|[("add", [[6,8],[10,12]]), ("reshape", [[1,2,3,4]]), ("matrix", [[1,2],[3,4]]), ("dot", [[7,10],[15,22]]), ("transpose", [[1,3],[2,4]])]
     ,
   )
+
+  // zeros, ones
+  let matrix1 = @nm.zeros(9).reshape([3, 3])
+  inspect!(
+    matrix1,
+    content="[[0,0,0],[0,0,0],[0,0,0]]",
+  )
+  let matrix2 = @nm.ones(6).reshape([2, 3])
+  inspect!(matrix2, content="[[1,1,1],[1,1,1]]")
+
+  // arange
+  let rows = @nm.arange(end=5)
+  inspect!(rows, content="[0,1,2,3,4]")
+  let cols = @nm.arange(start=1, end=5, step=0.5)
+  inspect!(cols, content="[1,1.5,2,2.5,3,3.5,4,4.5]")
 }

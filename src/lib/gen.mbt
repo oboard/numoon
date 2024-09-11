@@ -8,9 +8,17 @@ pub fn rand(length : Int) -> L {
   let arr = []
   let rand = @random.Rand::new()
   for i = 0; i < length; i = i + 1 {
-    arr.push(to_NMDouble(rand.double()))
+    arr.push(NMDouble(rand.double()))
   }
   { value: arr, shape: [length] }
+}
+
+pub fn arange(~start : Double = 0, ~end : Double, ~step : Double = 1) -> L {
+  let arr = []
+  for i = start; i < end; i = i + step {
+    arr.push(NMDouble(i))
+  }
+  { value: arr, shape: [arr.length()] }
 }
 
 pub fn ones(length : Int) -> L {
