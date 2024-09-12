@@ -174,4 +174,4 @@ We welcome contributions to Numoon! Please read our [contribution guide](CONTRIB
 
 ## 📝License
 
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details.
+This project is licensed under the Apache 2.0 License - see the [LICENSE.md](LICENSE.md) file for details.
