@@ -12,7 +12,7 @@ pub fn to_string(self : NMNum) -> String {
   }
 }
 
-pub fn output(self : NMNum, logger : Logger) -> Unit {
+pub fn output(self : NMNum, logger : &Logger) -> Unit {
   logger.write_string(self.to_string())
 }
 

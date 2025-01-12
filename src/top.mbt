@@ -9,6 +9,16 @@ test "add" {
   inspect!(add(), content="[3,4,5]")
 }
 
+test "add number" {
+  fn add() {
+    let num1 = @nm.from_int(1)
+    let num2 = @nm.from_double(1.1)
+    num1 + num2
+  }
+
+  inspect!(add(), content="2.1")
+}
+
 // sum
 test "sum" {
   fn sum() {
@@ -16,6 +26,14 @@ test "sum" {
   }
 
   inspect!(sum(), content="21")
+}
+
+test "sum2" {
+  fn sum() {
+    @nm.array([1, 1.1]).sum()
+  }
+
+  inspect!(sum(), content="2.1")
 }
 
 // prod
