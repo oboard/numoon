@@ -175,3 +175,9 @@ We welcome contributions to Numoon! Please read our [contribution guide](CONTRIB
 ## 📝License
 
 This project is licensed under the Apache 2.0 License - see the [LICENSE.md](LICENSE.md) file for details.
+
+
+
+QQ 群号：**949886784**
+
+![QQ群](qrcode.jpg)

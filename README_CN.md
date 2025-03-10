@@ -152,3 +152,11 @@ println(a)
 ## 📝 许可证
 
 本项目采用 Apache 2.0 许可证 - 详情请参阅 [LICENSE.md](LICENSE.md) 文件。
+
+
+
+🙌快来吧！🙌
+
+QQ 群号：**949886784**
+
+![QQ群](qrcode.jpg)
