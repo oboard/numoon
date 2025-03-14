@@ -1,4 +1,5 @@
 // add
+///|
 test "add" {
   fn add() {
     let list1 = @nm.array([1.0, 2, 3])
@@ -9,10 +10,11 @@ test "add" {
   inspect!(add(), content="[3,4,5]")
 }
 
+///|
 test "add number" {
   fn add() {
-    let num1 = @nm.from_int(1)
-    let num2 = @nm.from_double(1.1)
+    let num1 = @nm.NMNum::from_int(1)
+    let num2 = @nm.NMNum::from_double(1.1)
     num1 + num2
   }
 
@@ -20,6 +22,7 @@ test "add number" {
 }
 
 // sum
+///|
 test "sum" {
   fn sum() {
     @nm.array([1, 2, 3, 4, 5, 6]).sum()
@@ -28,6 +31,7 @@ test "sum" {
   inspect!(sum(), content="21")
 }
 
+///|
 test "sum2" {
   fn sum() {
     @nm.array([1, 1.1]).sum()
@@ -37,6 +41,7 @@ test "sum2" {
 }
 
 // prod
+///|
 test "prod" {
   fn prod() {
     @nm.array([1, 2, 3, 4, 5, 6]).prod()
@@ -46,6 +51,7 @@ test "prod" {
 }
 
 // reshape1
+///|
 test "reshape1" {
   fn reshape1() {
     @nm.array([1, 2, 3, 4, 5, 6]).reshape([2, 3])
@@ -55,6 +61,7 @@ test "reshape1" {
 }
 
 // reshape2
+///|
 test "reshape2" {
   fn reshape2() {
     @nm.array([[1, 2, 3], [4, 5, 6]]).reshape([3, 2])
@@ -64,17 +71,19 @@ test "reshape2" {
 }
 
 // matrix_multiplication
+///|
 test "matrix_multiplication" {
   fn matrix_multiplication() {
     let matrix1 = @nm.array([[1, 2, 3], [4, 5, 6]])
     let matrix2 = @nm.array([[7, 8], [9, 10], [11, 12]])
-    @nm.matmul(matrix1, matrix2)
+    matrix1.matmul(matrix2)
   }
 
   inspect!(matrix_multiplication(), content="[[58,64],[139,154]]")
 }
 
 // transpose
+///|
 test "transpose" {
   fn transpose() {
     let matrix = @nm.array([[1, 2, 3], [4, 5, 6]])
@@ -85,6 +94,7 @@ test "transpose" {
 }
 
 // convolve
+///|
 test "convolve" {
   fn convolve() {
     let a = @nm.array([[1, 2], [3, 4]])
@@ -96,18 +106,21 @@ test "convolve" {
 }
 
 // zeros
+///|
 test "zeros" {
   let matrix1 = @nm.zeros(9).reshape([3, 3])
   inspect!(matrix1, content="[[0,0,0],[0,0,0],[0,0,0]]")
 }
 
 // ones
+///|
 test "ones" {
   let matrix2 = @nm.ones(6).reshape([2, 3])
   inspect!(matrix2, content="[[1,1,1],[1,1,1]]")
 }
 
 // arange
+///|
 test "arange" {
   let rows = @nm.arange(end=5)
   inspect!(rows, content="[0,1,2,3,4]")
@@ -116,11 +129,13 @@ test "arange" {
 }
 
 // pi
+///|
 test "pi" {
   inspect!(@nm.pi, content="3.141592653589793")
 }
 
 // trigonometric functions
+///|
 test "trigonometric_functions" {
   inspect!(@nm.math_sinc(1.0), content="3.8982468850708534e-17")
   inspect!(@nm.math_sinh(1.0), content="1.1752011936438014")
@@ -135,6 +150,7 @@ test "trigonometric_functions" {
   inspect!(@nm.math_pow(2.0, 3.0), content="8")
 }
 
+///|
 test "functions on arrays" {
   inspect!(
     @nm.array([0.1, 0.2, 0.3])
@@ -149,6 +165,7 @@ test "functions on arrays" {
   )
 }
 
+///|
 test "slice" {
   let arr = @nm.array([1, 2, 3, 4, 5])
   inspect!(arr[2:4], content="[3,4]")

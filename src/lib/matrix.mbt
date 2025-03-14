@@ -1,4 +1,4 @@
-/// Performs matrix multiplication between two matrices. The function multiplies
+///| Performs matrix multiplication between two matrices. The function multiplies
 /// the matrix `self` by the matrix `other` and returns the resulting matrix.
 ///
 /// # Parameters
@@ -35,27 +35,28 @@ pub fn L::matmul(self : L, other : L) -> L {
   let res = Array::make(m * p, NMDouble(0.0))
   for i = 0; i < m; i = i + 1 {
     for j = 0; j < p; j = j + 1 {
-        for k = 0; k < n; k = k + 1 {
-            res[i * p + j] += a[i * n + k] * b[k * p + j]
-        }
+      for k = 0; k < n; k = k + 1 {
+        res[i * p + j] += a[i * n + k] * b[k * p + j]
+      }
     }
-}
+  }
   { value: res, shape: [m, p] }
 }
 
+///|
 test "Matrix multiplication example" {
 
   // matrix multiplication
   fn matrix_multiplication() {
     let matrix1 = array([[1, 2, 3], [4, 5, 6]])
     let matrix2 = array([[7, 8], [9, 10], [11, 12]])
-    // or matrix1.matmul(matrix2)
-    matmul(matrix1, matrix2)
+    matrix1.matmul(matrix2)
   }
 
   inspect!(matrix_multiplication(), content="[[58,64],[139,154]]")
 }
 
+///|
 pub fn L::transpose(self : L) -> L {
   let m = self.shape[0]
   let n = self.shape[1]
@@ -68,11 +69,12 @@ pub fn L::transpose(self : L) -> L {
       b[x] = arr[y].to_double()
     }
   }
-  let cL = from_array(b)
+  let cL = L::from_array(b)
   cL.shape = [n, m]
   cL
 }
 
+///|
 test "transpose example" {
   let matrix = array([1.0, 2.0, 3.0, 4.0]).reshape([2, 2])
   let transposed = matrix.transpose()

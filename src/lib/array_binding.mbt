@@ -6,7 +6,7 @@ pub fn L::map(self : L, func : (NMNum) -> NMNum) -> L {
 ///|
 pub fn L::map_double(self : L, func : (Double) -> Double) -> L {
   {
-    value: self.value.map(to_double).map(func).map(NMNum::NMDouble),
+    value: self.value.map(NMNum::to_double).map(func).map(NMNum::from_double),
     shape: self.shape,
   }
 }

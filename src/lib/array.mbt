@@ -11,30 +11,25 @@ pub fn length(self : L) -> Int {
 pub struct L {
   value : Array[NMNum]
   mut shape : Array[Int]
-} derive(Eq)
+} derive(Show, Eq)
 
 ///|
-pub fn op_get(self : L, index : Int) -> NMNum {
+pub fn L::op_get(self : L, index : Int) -> NMNum {
   self.value[index]
 }
 
 ///|
-pub fn op_set(self : L, index : Int, value : NMNum) -> L {
+pub fn L::op_set(self : L, index : Int, value : NMNum) -> L {
   self.value[index] = value
   self
 }
 
 ///|
-pub fn op_as_view(self : L, start~ : Int, end? : Int) -> L {
+pub fn L::op_as_view(self : L, start~ : Int, end? : Int) -> L {
   let value = self.value
   let start = start
   let end = end.or(value.length())
   { value: value[start:end].iter().to_array(), shape: [value.length()] }
-}
-
-///|
-pub fn output(self : L, logger : &Logger) -> Unit {
-  logger.write_string(self.to_string())
 }
 
 ///|
@@ -43,7 +38,7 @@ pub fn to_json(self : L) -> Json {
   fn buildArray(val : Array[NMNum], shape : Array[Int]) -> Json {
     if shape.length() == 1 {
       // 如果只有一个维度，直接返回数组的一部分
-      return Array(val.map(to_double).map(Json::Number))
+      return Array(val.map(NMNum::to_double).map(Json::Number))
     }
     // 初始化结果数组
     let result = []
@@ -73,7 +68,7 @@ pub fn to_json(self : L) -> Json {
 }
 
 ///|
-pub fn to_string(self : L) -> String {
+pub impl Show for L with to_string(self : L) -> String {
   self.to_json().stringify()
 }
 
@@ -206,6 +201,7 @@ pub fn op_eq(self : L, other : L) -> Bool {
   self.value == other.value
 }
 
+///|
 test {
   let a = array([[1, 2], [2, 3], [3, 4]])
   inspect!(a, content="[[1,2],[2,3],[3,4]]")
