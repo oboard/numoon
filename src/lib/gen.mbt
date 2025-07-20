@@ -7,7 +7,7 @@
 ///|
 pub fn rand(length : Int) -> L {
   let arr = []
-  let rand = @random.new()
+  let rand = @random.Rand::new()
   for i = 0; i < length; i = i + 1 {
     arr.push(NMDouble(rand.double()))
   }

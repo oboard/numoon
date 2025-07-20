@@ -15,7 +15,7 @@ pub impl Show for NMNum with to_string(self : NMNum) -> String {
 }
 
 ///|
-pub fn NMNum::op_add(self : NMNum, that : NMNum) -> NMNum {
+pub impl Add for NMNum with op_add(self : NMNum, that : NMNum) -> NMNum {
   match (self, that) {
     (NMInt(a), NMInt(b)) => NMInt(a + b)
     (NMDouble(a), NMDouble(b)) => NMDouble(a + b)
@@ -27,7 +27,7 @@ pub fn NMNum::op_add(self : NMNum, that : NMNum) -> NMNum {
 }
 
 ///|
-pub fn NMNum::op_sub(self : NMNum, that : NMNum) -> NMNum {
+pub impl Sub for NMNum with op_sub(self : NMNum, that : NMNum) -> NMNum {
   match (self, that) {
     (NMInt(a), NMInt(b)) => NMInt(a - b)
     (NMDouble(a), NMDouble(b)) => NMDouble(a - b)
@@ -39,7 +39,7 @@ pub fn NMNum::op_sub(self : NMNum, that : NMNum) -> NMNum {
 }
 
 ///|
-pub fn NMNum::op_div(self : NMNum, that : NMNum) -> NMNum {
+pub impl Div for NMNum with op_div(self : NMNum, that : NMNum) -> NMNum {
   match (self, that) {
     (NMInt(a), NMInt(b)) => NMInt(a / b)
     (NMDouble(a), NMDouble(b)) => NMDouble(a / b)
@@ -51,7 +51,7 @@ pub fn NMNum::op_div(self : NMNum, that : NMNum) -> NMNum {
 }
 
 ///|
-pub fn NMNum::op_mul(self : NMNum, that : NMNum) -> NMNum {
+pub impl Mul for NMNum with op_mul(self : NMNum, that : NMNum) -> NMNum {
   match (self, that) {
     (NMInt(a), NMInt(b)) => NMInt(a * b)
     (NMDouble(a), NMDouble(b)) => NMDouble(a * b)

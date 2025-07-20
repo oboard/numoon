@@ -22,9 +22,10 @@ pub fn linspace(
   arr
 }
 
+///|
 test "linspace" {
   let result = linspace(0.0, 1.0, num=5)
-  inspect!(result, content="[0, 0.25, 0.5, 0.75, 1]")
+  inspect(result, content="[0, 0.25, 0.5, 0.75, 1]")
 }
 
 ///|
@@ -87,6 +88,7 @@ pub fn L::convolve(
   }
 }
 
+///|
 test "valid convolve" {
   fn convolve() {
     let a = array([100, 20])
@@ -94,9 +96,10 @@ test "valid convolve" {
     a.convolve(b, mode=ConvolveMode::VALID)
   }
 
-  inspect!(convolve().value, content="[100, 20]")
+  inspect(convolve().value, content="[100, 20]")
 }
 
+///|
 test "full convolve" {
   fn convolve() {
     let a = array([1, 2, 3])
@@ -104,9 +107,10 @@ test "full convolve" {
     a.convolve(b)
   }
 
-  inspect!(convolve(), content="[0,1,2.5,4,1.5]")
+  inspect(convolve(), content="[0,1,2.5,4,1.5]")
 }
 
+///|
 test "same convolve" {
   fn convolve() {
     let a = array([1, 2, 3])
@@ -114,5 +118,5 @@ test "same convolve" {
     a.convolve(b, mode=ConvolveMode::SAME)
   }
 
-  inspect!(convolve(), content="[[1],[2.5],[4]]")
+  inspect(convolve(), content="[[1],[2.5],[4]]")
 }

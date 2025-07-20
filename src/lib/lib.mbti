@@ -1,0 +1,140 @@
+package "oboard/numoon/lib"
+
+// Values
+fn arange(start~ : Double = .., end~ : Double, step~ : Double = ..) -> L
+
+fn array(Json) -> L
+
+fn double_array(Array[Double]) -> L
+
+fn int_array(Array[Int]) -> L
+
+fn linspace(Double, Double, num~ : Int = ..) -> Array[Double]
+
+fn math_arccos(Double) -> Double
+
+fn math_arccosh(Double) -> Double
+
+fn math_arcsin(Double) -> Double
+
+fn math_arcsinh(Double) -> Double
+
+fn math_arctan(Double) -> Double
+
+fn math_arctan2(Double, Double) -> Double
+
+fn math_arctanh(Double) -> Double
+
+fn math_cos(Double) -> Double
+
+fn math_cosh(Double) -> Double
+
+fn math_deg2rad(Double) -> Double
+
+fn math_degrees(Double) -> Double
+
+fn math_exp(Double) -> Double
+
+fn math_ln(Double) -> Double
+
+fn math_pow(Double, Double) -> Double
+
+fn math_rad2deg(Double) -> Double
+
+fn math_radians(Double) -> Double
+
+fn math_sin(Double) -> Double
+
+fn math_sinc(Double) -> Double
+
+fn math_sinh(Double) -> Double
+
+fn math_tan(Double) -> Double
+
+fn math_tanh(Double) -> Double
+
+fn ones(Int) -> L
+
+let pi : Double
+
+fn rand(Int) -> L
+
+fn zeros(Int) -> L
+
+// Types and methods
+pub enum ConvolveMode {
+  SAME
+  VALID
+  FULL
+}
+
+pub struct L {
+  value : Array[NMNum]
+  mut shape : Array[Int]
+}
+fn L::abs(Self) -> Self
+fn L::arccos(Self) -> Self
+fn L::arccosh(Self) -> Self
+fn L::arcsin(Self) -> Self
+fn L::arcsinh(Self) -> Self
+fn L::arctan(Self) -> Self
+fn L::arctanh(Self) -> Self
+fn L::ceil(Self) -> Self
+fn L::convolve(Self, Self, mode~ : ConvolveMode = ..) -> Self
+fn L::cos(Self) -> Self
+fn L::cosh(Self) -> Self
+fn L::divide(Self, Json) -> Self
+fn L::exp(Self) -> Self
+fn L::filter(Self, (NMNum) -> Bool) -> Self
+fn L::floor(Self) -> Self
+fn L::fold(Self, init~ : NMNum, (NMNum, NMNum) -> NMNum) -> NMNum
+fn L::from(Json) -> Self
+fn L::from_array(Array[Double]) -> Self
+fn L::length(Self) -> Int
+fn L::ln(Self) -> Self
+fn L::map(Self, (NMNum) -> NMNum) -> Self
+fn L::map_double(Self, (Double) -> Double) -> Self
+fn L::matmul(Self, Self) -> Self
+fn L::multiply(Self, Json) -> Self
+fn L::op_as_view(Self, start~ : Int, end? : Int) -> Self
+fn L::op_get(Self, Int) -> NMNum
+fn L::op_set(Self, Int, NMNum) -> Self
+fn L::prod(Self) -> NMNum
+fn L::reshape(Self, Array[Int]) -> Self
+fn L::round(Self) -> Self
+fn L::sin(Self) -> Self
+fn L::sinh(Self) -> Self
+fn L::sqrt(Self) -> Self
+fn L::sum(Self) -> NMNum
+fn L::tan(Self) -> Self
+fn L::tanh(Self) -> Self
+fn L::to_array(Self) -> Array[Double]
+fn L::to_json(Self) -> Json
+fn L::transpose(Self) -> Self
+impl Add for L
+impl Div for L
+impl Eq for L
+impl Mul for L
+impl Show for L
+impl Sub for L
+
+pub enum NMNum {
+  NMInt(Int)
+  NMDouble(Double)
+  NMString(String)
+}
+fn NMNum::from_double(Double) -> Self
+fn NMNum::from_int(Int) -> Self
+fn NMNum::to_double(Self) -> Double
+fn NMNum::to_int(Self) -> Int
+impl Add for NMNum
+impl Div for NMNum
+impl Eq for NMNum
+impl Mul for NMNum
+impl Show for NMNum
+impl Sub for NMNum
+
+// Type aliases
+
+// Traits
+

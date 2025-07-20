@@ -53,7 +53,7 @@ test "Matrix multiplication example" {
     matrix1.matmul(matrix2)
   }
 
-  inspect!(matrix_multiplication(), content="[[58,64],[139,154]]")
+  inspect(matrix_multiplication(), content="[[58,64],[139,154]]")
 }
 
 ///|
@@ -78,6 +78,6 @@ pub fn L::transpose(self : L) -> L {
 test "transpose example" {
   let matrix = array([1.0, 2.0, 3.0, 4.0]).reshape([2, 2])
   let transposed = matrix.transpose()
-  inspect!(transposed, content="[[1,3],[2,4]]")
-  inspect!(transposed.shape, content="[2, 2]")
+  inspect(transposed, content="[[1,3],[2,4]]")
+  inspect(transposed.shape, content="[2, 2]")
 }

@@ -279,32 +279,32 @@ pub fn math_arccos(x : Double) -> Double {
 
 ///|
 pub fn math_sinh(x : Double) -> Double {
-  (x.exp() - (-x).exp()) / 2.0
+  (@math.exp(x) - @math.exp(-x)) / 2.0
 }
 
 ///|
 pub fn math_cosh(x : Double) -> Double {
-  (x.exp() + (-x).exp()) / 2.0
+  (@math.exp(x) + @math.exp(-x)) / 2.0
 }
 
 ///|
 pub fn math_tanh(x : Double) -> Double {
-  (x.exp() - (-x).exp()) / (x.exp() + (-x).exp())
+  (@math.exp(x) - @math.exp(-x)) / (@math.exp(x) + @math.exp(-x))
 }
 
 ///|
 pub fn math_arcsinh(x : Double) -> Double {
-  x.log10() + (x * x + 1.0).sqrt()
+  @math.log10(x) + (x * x + 1.0).sqrt()
 }
 
 ///|
 pub fn math_arccosh(x : Double) -> Double {
-  (x + (x * x - 1.0).sqrt()).log10()
+  @math.log10(x + (x * x - 1.0).sqrt())
 }
 
 ///|
 pub fn math_arctanh(x : Double) -> Double {
-  ((1.0 + x).ln() - (1.0 - x).ln()) / 2.0
+  (@math.ln(1.0 + x) - @math.ln(1.0 - x)) / 2.0
 }
 
 ///|
@@ -398,28 +398,29 @@ pub fn math_rad2deg(x : Double) -> Double {
 
 ///|
 pub fn math_exp(x : Double) -> Double {
-  x.exp()
+  @math.exp(x)
 }
 
 ///|
 pub fn math_ln(x : Double) -> Double {
-  x.ln()
+  @math.ln(x)
 }
 
+///|
 test {
-  inspect!(math_sinc(1.0), content="3.8982468850708534e-17")
-  inspect!(math_sinh(1.0), content="1.1752011936438014")
-  inspect!(math_cosh(1.0), content="1.5430806348152437")
-  inspect!(math_tanh(1.0), content="0.7615941559557649")
-  inspect!(math_arcsinh(1.0), content="1.4142135623730951")
-  inspect!(math_arccosh(1.0), content="0")
-  inspect!(math_arctanh(0.5), content="0.5493061443340548")
-  inspect!(math_arctan2(1.0, 1.0), content="0.7853981633974483")
-  inspect!(math_degrees(pi), content="180")
-  inspect!(math_radians(180.0), content="3.141592653589793")
-  inspect!(math_pow(2.0, 3.0), content="8")
-  inspect!(math_exp(1.0), content="2.718281828459045")
-  inspect!(math_ln(2.718281828459045), content="1")
-  inspect!(math_deg2rad(180.0), content="3.141592653589793")
-  inspect!(math_rad2deg(3.141592653589793), content="180")
+  inspect(math_sinc(1.0), content="3.8982468850708534e-17")
+  inspect(math_sinh(1.0), content="1.1752011936438014")
+  inspect(math_cosh(1.0), content="1.5430806348152437")
+  inspect(math_tanh(1.0), content="0.7615941559557649")
+  inspect(math_arcsinh(1.0), content="1.4142135623730951")
+  inspect(math_arccosh(1.0), content="0")
+  inspect(math_arctanh(0.5), content="0.5493061443340548")
+  inspect(math_arctan2(1.0, 1.0), content="0.7853981633974483")
+  inspect(math_degrees(pi), content="180")
+  inspect(math_radians(180.0), content="3.141592653589793")
+  inspect(math_pow(2.0, 3.0), content="8")
+  inspect(math_exp(1.0), content="2.718281828459045")
+  inspect(math_ln(2.718281828459045), content="1")
+  inspect(math_deg2rad(180.0), content="3.141592653589793")
+  inspect(math_rad2deg(3.141592653589793), content="180")
 }

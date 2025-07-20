@@ -11,7 +11,7 @@ pub fn length(self : L) -> Int {
 pub struct L {
   value : Array[NMNum]
   mut shape : Array[Int]
-} derive(Show, Eq)
+} derive(Show)
 
 ///|
 pub fn L::op_get(self : L, index : Int) -> NMNum {
@@ -28,7 +28,7 @@ pub fn L::op_set(self : L, index : Int, value : NMNum) -> L {
 pub fn L::op_as_view(self : L, start~ : Int, end? : Int) -> L {
   let value = self.value
   let start = start
-  let end = end.or(value.length())
+  let end = end.unwrap_or(value.length())
   { value: value[start:end].iter().to_array(), shape: [value.length()] }
 }
 
@@ -38,7 +38,7 @@ pub fn to_json(self : L) -> Json {
   fn buildArray(val : Array[NMNum], shape : Array[Int]) -> Json {
     if shape.length() == 1 {
       // 如果只有一个维度，直接返回数组的一部分
-      return Array(val.map(NMNum::to_double).map(Json::Number))
+      return val.map(NMNum::to_double).map(_.to_json()).to_json()
     }
     // 初始化结果数组
     let result = []
@@ -46,7 +46,7 @@ pub fn to_json(self : L) -> Json {
 
     // 计算每个子数组的长度
     let subArrayLength = shape[1]
-    let totalLength = prod(int_array(shape)).to_int()
+    let totalLength = int_array(shape).prod().to_int()
     // 确保值的数量与形状匹配
     if val.length() != totalLength {
       abort("The total length of shape does not match the length of values.")
@@ -61,7 +61,7 @@ pub fn to_json(self : L) -> Json {
       )
       index += subArrayLength
     }
-    Array(result)
+    result.to_json()
   }
 
   buildArray(value, shape)
@@ -79,12 +79,12 @@ pub fn array(json : Json) -> L {
 
 ///|
 pub fn int_array(arr : Array[Int]) -> L {
-  { value: arr.map(NMNum::NMInt), shape: [arr.length()] }
+  { value: arr.map(NMNum::NMInt(_)), shape: [arr.length()] }
 }
 
 ///|
 pub fn double_array(arr : Array[Double]) -> L {
-  { value: arr.map(NMNum::NMDouble), shape: [arr.length(), 1] }
+  { value: arr.map(NMNum::NMDouble(_)), shape: [arr.length(), 1] }
 }
 
 ///|
@@ -124,7 +124,7 @@ pub fn L::from(json : Json) -> L {
 
 ///|
 pub fn L::from_array(array : Array[Double]) -> L {
-  { value: array.map(NMNum::NMDouble), shape: [array.length(), 1] }
+  { value: array.map(NMNum::NMDouble(_)), shape: [array.length(), 1] }
 }
 
 ///|
@@ -135,6 +135,7 @@ pub fn L::to_array(self : L) -> Array[Double] {
 // pub fn NMList::from_array(array : Array[Double]) -> NMList[NMNum] {
 //   { value: array.map(NMNum::from_double).to_list() }
 // }
+
 ///|
 pub fn reshape(self : L, shape : Array[Int]) -> L {
   { value: self.value, shape }
@@ -159,7 +160,7 @@ pub fn prod(self : L) -> NMNum {
 }
 
 ///|
-pub fn op_add(self : L, other : L) -> L {
+pub impl Add for L with op_add(self : L, other : L) -> L {
   // [1, 2, 3] + [4, 5, 6] => [5, 7, 9]
   let selfArray = self.value
   let otherArray = other.value
@@ -168,7 +169,7 @@ pub fn op_add(self : L, other : L) -> L {
 }
 
 ///|
-pub fn op_sub(self : L, other : L) -> L {
+pub impl Sub for L with op_sub(self : L, other : L) -> L {
   // [1, 2, 3] - [4, 5, 6] => [-3, -3, -3]
   let selfArray = self.value
   let otherArray = other.value
@@ -177,7 +178,7 @@ pub fn op_sub(self : L, other : L) -> L {
 }
 
 ///|
-pub fn op_mul(self : L, other : L) -> L {
+pub impl Mul for L with op_mul(self : L, other : L) -> L {
   // [1, 2, 3] * [4, 5, 6] => [4, 10, 18]
   let selfArray = self.value
   let otherArray = other.value
@@ -186,7 +187,7 @@ pub fn op_mul(self : L, other : L) -> L {
 }
 
 ///|
-pub fn op_div(self : L, other : L) -> L {
+pub impl Div for L with op_div(self : L, other : L) -> L {
   // [1, 2, 3] / [4, 5, 6] => [0.25, 0.4, 0.5]
   let selfArray = self.value
   let otherArray = other.value
@@ -195,7 +196,7 @@ pub fn op_div(self : L, other : L) -> L {
 }
 
 ///|
-pub fn op_eq(self : L, other : L) -> Bool {
+pub impl Eq for L with op_equal(self : L, other : L) -> Bool {
   // [1, 2, 3] == [1, 2, 3] => true
   // [1, 2, 3] == [1, 2, 4] => false
   self.value == other.value
@@ -204,6 +205,6 @@ pub fn op_eq(self : L, other : L) -> Bool {
 ///|
 test {
   let a = array([[1, 2], [2, 3], [3, 4]])
-  inspect!(a, content="[[1,2],[2,3],[3,4]]")
-  inspect!(a.shape, content="[3, 2]")
+  inspect(a, content="[[1,2],[2,3],[3,4]]")
+  inspect(a.shape, content="[3, 2]")
 }
