@@ -15,7 +15,7 @@ pub fn rand(length : Int) -> L {
 }
 
 ///|
-pub fn arange(start~ : Double = 0, end~ : Double, step~ : Double = 1) -> L {
+pub fn arange(start? : Double = 0, end~ : Double, step? : Double = 1) -> L {
   let arr = []
   for i = start; i < end; i = i + step {
     arr.push(NMDouble(i))

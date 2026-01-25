@@ -1,4 +1,5 @@
-///| Generate an array of linearly spaced values between `start` and `stop`.
+///|
+/// Generate an array of linearly spaced values between `start` and `stop`.
 ///
 /// # Parameters
 ///
@@ -12,7 +13,7 @@
 pub fn linspace(
   start : Double,
   stop : Double,
-  num~ : Int = 50
+  num? : Int = 50,
 ) -> Array[Double] {
   let step = (stop - start) / (num.to_double() - 1.0)
   let arr = []
@@ -35,7 +36,8 @@ pub enum ConvolveMode {
   FULL
 }
 
-///| Convolve the input list `self` with the `kernel` list using the specified
+///|
+/// Convolve the input list `self` with the `kernel` list using the specified
 /// `mode`.
 ///
 /// # Parameters
@@ -59,7 +61,7 @@ pub enum ConvolveMode {
 pub fn L::convolve(
   self : L,
   kernel : L,
-  mode~ : ConvolveMode = ConvolveMode::FULL
+  mode? : ConvolveMode = ConvolveMode::FULL,
 ) -> L {
   let n = self.length()
   let m = kernel.length()

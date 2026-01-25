@@ -2,20 +2,20 @@
 pub enum NMNum {
   NMInt(Int)
   NMDouble(Double)
-  NMString(String)
-} derive(Show, Eq)
+  NMString(StringView)
+} derive(Eq)
 
 ///|
-pub impl Show for NMNum with to_string(self : NMNum) -> String {
+pub impl Show for NMNum with output(self, logger) {
   match self {
-    NMInt(i) => i.to_string()
-    NMDouble(d) => d.to_string()
-    NMString(s) => s
+    NMInt(i) => i.output(logger)
+    NMDouble(d) => d.output(logger)
+    NMString(s) => logger.write_view(s)
   }
 }
 
 ///|
-pub impl Add for NMNum with op_add(self : NMNum, that : NMNum) -> NMNum {
+pub impl Add for NMNum with add(self : NMNum, that : NMNum) -> NMNum {
   match (self, that) {
     (NMInt(a), NMInt(b)) => NMInt(a + b)
     (NMDouble(a), NMDouble(b)) => NMDouble(a + b)
@@ -27,7 +27,7 @@ pub impl Add for NMNum with op_add(self : NMNum, that : NMNum) -> NMNum {
 }
 
 ///|
-pub impl Sub for NMNum with op_sub(self : NMNum, that : NMNum) -> NMNum {
+pub impl Sub for NMNum with sub(self : NMNum, that : NMNum) -> NMNum {
   match (self, that) {
     (NMInt(a), NMInt(b)) => NMInt(a - b)
     (NMDouble(a), NMDouble(b)) => NMDouble(a - b)
@@ -39,7 +39,7 @@ pub impl Sub for NMNum with op_sub(self : NMNum, that : NMNum) -> NMNum {
 }
 
 ///|
-pub impl Div for NMNum with op_div(self : NMNum, that : NMNum) -> NMNum {
+pub impl Div for NMNum with div(self : NMNum, that : NMNum) -> NMNum {
   match (self, that) {
     (NMInt(a), NMInt(b)) => NMInt(a / b)
     (NMDouble(a), NMDouble(b)) => NMDouble(a / b)
@@ -51,7 +51,7 @@ pub impl Div for NMNum with op_div(self : NMNum, that : NMNum) -> NMNum {
 }
 
 ///|
-pub impl Mul for NMNum with op_mul(self : NMNum, that : NMNum) -> NMNum {
+pub impl Mul for NMNum with mul(self : NMNum, that : NMNum) -> NMNum {
   match (self, that) {
     (NMInt(a), NMInt(b)) => NMInt(a * b)
     (NMDouble(a), NMDouble(b)) => NMDouble(a * b)

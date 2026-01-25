@@ -1,11 +1,15 @@
 {
   "name": "oboard/numoon",
-  "version": "0.3.5",
+  "version": "0.4.0",
   "deps": {},
   "readme": "README.md",
   "repository": "https://github.com/oboard/numoon",
   "license": "Apache-2.0",
-  "keywords": ["moonbit", "numoon", "matrix", "math"],
-  "description": "MoonBit Mathematical Operation",
-  "source": "src"
+  "keywords": [
+    "moonbit",
+    "numoon",
+    "matrix",
+    "math"
+  ],
+  "description": "MoonBit Mathematical Operation"
 }

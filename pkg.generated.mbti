@@ -1,0 +1,146 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "oboard/numoon"
+
+// Values
+pub fn arange(start? : Double, end~ : Double, step? : Double) -> L
+
+pub fn array(Json) -> L
+
+pub fn double_array(Array[Double]) -> L
+
+pub fn int_array(Array[Int]) -> L
+
+pub fn linspace(Double, Double, num? : Int) -> Array[Double]
+
+pub fn math_arccos(Double) -> Double
+
+pub fn math_arccosh(Double) -> Double
+
+pub fn math_arcsin(Double) -> Double
+
+pub fn math_arcsinh(Double) -> Double
+
+pub fn math_arctan(Double) -> Double
+
+pub fn math_arctan2(Double, Double) -> Double
+
+pub fn math_arctanh(Double) -> Double
+
+pub fn math_cos(Double) -> Double
+
+pub fn math_cosh(Double) -> Double
+
+pub fn math_deg2rad(Double) -> Double
+
+pub fn math_degrees(Double) -> Double
+
+pub fn math_exp(Double) -> Double
+
+pub fn math_ln(Double) -> Double
+
+pub fn math_pow(Double, Double) -> Double
+
+pub fn math_rad2deg(Double) -> Double
+
+pub fn math_radians(Double) -> Double
+
+pub fn math_sin(Double) -> Double
+
+pub fn math_sinc(Double) -> Double
+
+pub fn math_sinh(Double) -> Double
+
+pub fn math_tan(Double) -> Double
+
+pub fn math_tanh(Double) -> Double
+
+pub fn ones(Int) -> L
+
+pub let pi : Double
+
+pub fn rand(Int) -> L
+
+pub fn zeros(Int) -> L
+
+// Errors
+
+// Types and methods
+pub enum ConvolveMode {
+  SAME
+  VALID
+  FULL
+}
+
+pub struct L {
+  value : Array[NMNum]
+  mut shape : Array[Int]
+}
+pub fn L::abs(Self) -> Self
+pub fn L::arccos(Self) -> Self
+pub fn L::arccosh(Self) -> Self
+pub fn L::arcsin(Self) -> Self
+pub fn L::arcsinh(Self) -> Self
+pub fn L::arctan(Self) -> Self
+pub fn L::arctanh(Self) -> Self
+#alias("_[_:_]")
+pub fn L::as_view(Self, start~ : Int, end? : Int) -> Self
+pub fn L::ceil(Self) -> Self
+pub fn L::convolve(Self, Self, mode? : ConvolveMode) -> Self
+pub fn L::cos(Self) -> Self
+pub fn L::cosh(Self) -> Self
+pub fn L::divide(Self, Json) -> Self
+pub fn L::exp(Self) -> Self
+pub fn L::filter(Self, (NMNum) -> Bool) -> Self
+pub fn L::floor(Self) -> Self
+pub fn L::fold(Self, init~ : NMNum, (NMNum, NMNum) -> NMNum) -> NMNum
+pub fn L::from(Json) -> Self
+pub fn L::from_array(Array[Double]) -> Self
+#alias("_[_]")
+pub fn L::get(Self, Int) -> NMNum
+pub fn L::length(Self) -> Int
+pub fn L::ln(Self) -> Self
+pub fn L::map(Self, (NMNum) -> NMNum) -> Self
+pub fn L::map_double(Self, (Double) -> Double) -> Self
+pub fn L::matmul(Self, Self) -> Self
+pub fn L::multiply(Self, Json) -> Self
+pub fn L::prod(Self) -> NMNum
+pub fn L::reshape(Self, Array[Int]) -> Self
+pub fn L::round(Self) -> Self
+#alias("_[_]=_")
+pub fn L::set(Self, Int, NMNum) -> Self
+pub fn L::sin(Self) -> Self
+pub fn L::sinh(Self) -> Self
+pub fn L::sqrt(Self) -> Self
+pub fn L::sum(Self) -> NMNum
+pub fn L::tan(Self) -> Self
+pub fn L::tanh(Self) -> Self
+pub fn L::to_array(Self) -> Array[Double]
+pub fn L::to_json(Self) -> Json
+pub fn L::transpose(Self) -> Self
+pub impl Add for L
+pub impl Div for L
+pub impl Eq for L
+pub impl Mul for L
+pub impl Show for L
+pub impl Sub for L
+
+pub enum NMNum {
+  NMInt(Int)
+  NMDouble(Double)
+  NMString(StringView)
+}
+pub fn NMNum::from_double(Double) -> Self
+pub fn NMNum::from_int(Int) -> Self
+pub fn NMNum::to_double(Self) -> Double
+pub fn NMNum::to_int(Self) -> Int
+pub impl Add for NMNum
+pub impl Div for NMNum
+pub impl Eq for NMNum
+pub impl Mul for NMNum
+pub impl Show for NMNum
+pub impl Sub for NMNum
+
+// Type aliases
+
+// Traits
+

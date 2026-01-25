@@ -1,8 +1,8 @@
 {
   "import": [
     {
-      "path": "oboard/numoon/lib",
+      "path": "oboard/numoon",
       "alias": "nm"
-    } 
+    }
   ]
 }

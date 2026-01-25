@@ -1,4 +1,5 @@
-///| Performs matrix multiplication between two matrices. The function multiplies
+///|
+/// Performs matrix multiplication between two matrices. The function multiplies
 /// the matrix `self` by the matrix `other` and returns the resulting matrix.
 ///
 /// # Parameters

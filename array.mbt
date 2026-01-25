@@ -1,5 +1,5 @@
 ///|
-pub fn length(self : L) -> Int {
+pub fn L::length(self : L) -> Int {
   match self.shape.length() {
     0 => 0
     1 => self.shape[0]
@@ -14,18 +14,21 @@ pub struct L {
 } derive(Show)
 
 ///|
-pub fn L::op_get(self : L, index : Int) -> NMNum {
+#alias("_[_]")
+pub fn L::get(self : L, index : Int) -> NMNum {
   self.value[index]
 }
 
 ///|
-pub fn L::op_set(self : L, index : Int, value : NMNum) -> L {
+#alias("_[_]=_")
+pub fn L::set(self : L, index : Int, value : NMNum) -> L {
   self.value[index] = value
   self
 }
 
 ///|
-pub fn L::op_as_view(self : L, start~ : Int, end? : Int) -> L {
+#alias("_[_:_]")
+pub fn L::as_view(self : L, start~ : Int, end? : Int) -> L {
   let value = self.value
   let start = start
   let end = end.unwrap_or(value.length())
@@ -33,7 +36,7 @@ pub fn L::op_as_view(self : L, start~ : Int, end? : Int) -> L {
 }
 
 ///|
-pub fn to_json(self : L) -> Json {
+pub fn L::to_json(self : L) -> Json {
   let { value, shape } = self
   fn buildArray(val : Array[NMNum], shape : Array[Int]) -> Json {
     if shape.length() == 1 {
@@ -106,7 +109,7 @@ pub fn L::from(json : Json) -> L {
               shape[level] = array.length()
             }
           }
-          Number(number) => value.push(NMDouble(number))
+          Number(number, ..) => value.push(NMDouble(number))
           String(string) => value.push(NMString(string))
           True => value.push(NMInt(1))
           False => value.push(NMInt(0))
@@ -137,12 +140,12 @@ pub fn L::to_array(self : L) -> Array[Double] {
 // }
 
 ///|
-pub fn reshape(self : L, shape : Array[Int]) -> L {
+pub fn L::reshape(self : L, shape : Array[Int]) -> L {
   { value: self.value, shape }
 }
 
 ///|
-pub fn sum(self : L) -> NMNum {
+pub fn L::sum(self : L) -> NMNum {
   let mut sum = 0.0
   for i = 0; i < self.value.length(); i = i + 1 {
     sum = sum + self.value[i].to_double()
@@ -151,7 +154,7 @@ pub fn sum(self : L) -> NMNum {
 }
 
 ///|
-pub fn prod(self : L) -> NMNum {
+pub fn L::prod(self : L) -> NMNum {
   let mut prod = 1.0
   for i = 0; i < self.value.length(); i = i + 1 {
     prod = prod * self.value[i].to_double()
@@ -160,7 +163,7 @@ pub fn prod(self : L) -> NMNum {
 }
 
 ///|
-pub impl Add for L with op_add(self : L, other : L) -> L {
+pub impl Add for L with add(self : L, other : L) -> L {
   // [1, 2, 3] + [4, 5, 6] => [5, 7, 9]
   let selfArray = self.value
   let otherArray = other.value
@@ -169,7 +172,7 @@ pub impl Add for L with op_add(self : L, other : L) -> L {
 }
 
 ///|
-pub impl Sub for L with op_sub(self : L, other : L) -> L {
+pub impl Sub for L with sub(self : L, other : L) -> L {
   // [1, 2, 3] - [4, 5, 6] => [-3, -3, -3]
   let selfArray = self.value
   let otherArray = other.value
@@ -178,7 +181,7 @@ pub impl Sub for L with op_sub(self : L, other : L) -> L {
 }
 
 ///|
-pub impl Mul for L with op_mul(self : L, other : L) -> L {
+pub impl Mul for L with mul(self : L, other : L) -> L {
   // [1, 2, 3] * [4, 5, 6] => [4, 10, 18]
   let selfArray = self.value
   let otherArray = other.value
@@ -187,7 +190,7 @@ pub impl Mul for L with op_mul(self : L, other : L) -> L {
 }
 
 ///|
-pub impl Div for L with op_div(self : L, other : L) -> L {
+pub impl Div for L with div(self : L, other : L) -> L {
   // [1, 2, 3] / [4, 5, 6] => [0.25, 0.4, 0.5]
   let selfArray = self.value
   let otherArray = other.value
@@ -196,7 +199,7 @@ pub impl Div for L with op_div(self : L, other : L) -> L {
 }
 
 ///|
-pub impl Eq for L with op_equal(self : L, other : L) -> Bool {
+pub impl Eq for L with equal(self : L, other : L) -> Bool {
   // [1, 2, 3] == [1, 2, 3] => true
   // [1, 2, 3] == [1, 2, 4] => false
   self.value == other.value

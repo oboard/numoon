@@ -20,24 +20,24 @@ pub fn L::filter(self : L, func : (NMNum) -> Bool) -> L {
 pub fn L::fold(
   self : L,
   init~ : NMNum,
-  func : (NMNum, NMNum) -> NMNum
+  func : (NMNum, NMNum) -> NMNum,
 ) -> NMNum {
   self.value.fold(init~, func)
 }
 
 ///|
 pub fn L::sin(self : L) -> L {
-  self.map_double(math_sin)
+  self.map_double(@math.sin)
 }
 
 ///|
 pub fn L::cos(self : L) -> L {
-  self.map_double(math_cos)
+  self.map_double(@math.cos)
 }
 
 ///|
 pub fn L::tan(self : L) -> L {
-  self.map_double(math_tan)
+  self.map_double(@math.tan)
 }
 
 ///|
@@ -57,17 +57,17 @@ pub fn L::arctan(self : L) -> L {
 
 ///|
 pub fn L::sinh(self : L) -> L {
-  self.map_double(math_sinh)
+  self.map_double(@math.sinh)
 }
 
 ///|
 pub fn L::cosh(self : L) -> L {
-  self.map_double(math_cosh)
+  self.map_double(@math.cosh)
 }
 
 ///|
 pub fn L::tanh(self : L) -> L {
-  self.map_double(math_tanh)
+  self.map_double(@math.tanh)
 }
 
 ///|
@@ -87,18 +87,18 @@ pub fn L::arctanh(self : L) -> L {
 
 ///|
 pub fn L::exp(self : L) -> L {
-  self.map_double(math_exp)
+  self.map_double(@math.exp)
 }
 
 ///|
 pub fn L::ln(self : L) -> L {
-  self.map_double(math_ln)
+  self.map_double(@math.ln)
 }
 
 ///|
 pub fn L::multiply(self : L, other : Json) -> L {
   match other {
-    Number(num) => self.map_double(fn(x) { x * num })
+    Number(num, ..) => self.map_double(fn(x) { x * num })
     _ => self
   }
 }
@@ -106,7 +106,7 @@ pub fn L::multiply(self : L, other : Json) -> L {
 ///|
 pub fn L::divide(self : L, other : Json) -> L {
   match other {
-    Number(num) => self.map_double(fn(x) { x / num })
+    Number(num, ..) => self.map_double(fn(x) { x / num })
     _ => self
   }
 }
