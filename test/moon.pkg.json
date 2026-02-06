@@ -1,8 +1,0 @@
-{
-  "import": [
-    {
-      "path": "oboard/numoon",
-      "alias": "nm"
-    }
-  ]
-}

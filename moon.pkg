@@ -1,0 +1,6 @@
+import {
+  "moonbitlang/core/random",
+  "moonbitlang/core/double",
+  "moonbitlang/core/math",
+  "moonbitlang/core/json",
+}

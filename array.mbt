@@ -41,7 +41,7 @@ pub fn L::to_json(self : L) -> Json {
   fn buildArray(val : Array[NMNum], shape : Array[Int]) -> Json {
     if shape.length() == 1 {
       // 如果只有一个维度，直接返回数组的一部分
-      return val.map(NMNum::to_double).map(_.to_json()).to_json()
+      return val.map(x => x.to_double()).map(x => x.to_json()).to_json()
     }
     // 初始化结果数组
     let result = []
@@ -82,12 +82,12 @@ pub fn array(json : Json) -> L {
 
 ///|
 pub fn int_array(arr : Array[Int]) -> L {
-  { value: arr.map(NMNum::NMInt(_)), shape: [arr.length()] }
+  { value: arr.map(x => NMNum::NMInt(x)), shape: [arr.length()] }
 }
 
 ///|
 pub fn double_array(arr : Array[Double]) -> L {
-  { value: arr.map(NMNum::NMDouble(_)), shape: [arr.length(), 1] }
+  { value: arr.map(x => NMNum::NMDouble(x)), shape: [arr.length(), 1] }
 }
 
 ///|
@@ -127,12 +127,12 @@ pub fn L::from(json : Json) -> L {
 
 ///|
 pub fn L::from_array(array : Array[Double]) -> L {
-  { value: array.map(NMNum::NMDouble(_)), shape: [array.length(), 1] }
+  { value: array.map(x => NMNum::NMDouble(x)), shape: [array.length(), 1] }
 }
 
 ///|
 pub fn L::to_array(self : L) -> Array[Double] {
-  self.value.map(fn(x) { x.to_double() })
+  self.value.map(x => x.to_double())
 }
 
 // pub fn NMList::from_array(array : Array[Double]) -> NMList[NMNum] {
